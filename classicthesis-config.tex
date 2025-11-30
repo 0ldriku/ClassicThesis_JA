@@ -1,0 +1,451 @@
+% ****************************************************************************************************
+% classicthesis-config.tex
+% formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty
+% Use it at the beginning of your ClassicThesis.tex, or as a LaTeX Preamble
+% in your ClassicThesis.{tex,lyx} with \input{classicthesis-config}
+% ****************************************************************************************************
+% If you like the classicthesis, then I would appreciate a postcard.
+% My address can be found in the file ClassicThesis.pdf. A collection
+% of the postcards I received so far is available online at
+% http://postcards.miede.de
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 0. Set the encoding of your files. UTF-8 is the only sensible encoding nowadays. If you can't read
+% äöüßáéçèê∂åëæƒÏ€ then change the encoding setting in your editor, not the line below. If your editor
+% does not support utf8 use another editor!
+% ****************************************************************************************************
+\usepackage{iftex}
+\ifPDFTeX
+  \PassOptionsToPackage{utf8}{inputenc}
+  \usepackage{inputenc}
+  \PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+  \usepackage{fontenc}
+\else
+  \usepackage{fontspec}
+\fi
+
+
+% ****************************************************************************************************
+% 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
+% in order to deactivate the time-stamp on the pages
+% (see ClassicThesis.pdf for more information):
+% ****************************************************************************************************
+\PassOptionsToPackage{
+  drafting=false,    % print version information on the bottom of the pages
+  tocaligned=false, % the left column of the toc will be aligned (no indentation)
+  dottedtoc=false,  % page numbers in ToC flushed right
+  eulerchapternumbers=false, % use AMS Euler for chapter font (otherwise Palatino)
+  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  beramono=true,    % toggle a nice monospaced font (w/ bold)
+  palatino=true,    % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  %linedheaders=true, % obsolete / available for backwards compatibility
+  style=classicthesis % classicthesis, arsclassica, linedheaders, plain
+}{classicthesis}
+
+% ****************************************************************************************************
+% 2. Personal data and user ad-hoc commands (insert your own data here)
+% ****************************************************************************************************
+% ****************************************************************************************************
+% 2. Personal data and user ad-hoc commands (insert your own data here)
+% ****************************************************************************************************
+\newcommand{\myTitle}{The Title of the Thesis\xspace}
+\newcommand{\mySubtitle}{The Subtitle of the Thesis\xspace}
+\newcommand{\myDegree}{Your Degree\xspace}
+\newcommand{\myName}{Your Name\xspace}
+\newcommand{\myProf}{Your Supervisor\xspace}
+\newcommand{\myOtherProf}{Your Other Supervisor\xspace}
+\newcommand{\mySupervisor}{Your Supervisor\xspace}
+\newcommand{\myFaculty}{Your Faculty\xspace}
+\newcommand{\myDepartment}{Your Department\xspace}
+\newcommand{\myUni}{Your Uni\xspace}
+\newcommand{\myLocation}{Location\xspace}
+\newcommand{\myTime}{Month Year\xspace}
+\newcommand{\myVersion}{v1.0\xspace}
+
+% ********************************************************************
+% Setup, finetuning, and useful commands
+% ********************************************************************
+\providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
+\newcommand{\autorefja}[1]{%
+  \begingroup
+  \def\chapterautorefname{章}%
+  \def\sectionautorefname{節}%
+  \def\subsectionautorefname{項}%
+  \def\figureautorefname{図}%
+  \def\tableautorefname{表}%
+  \def\equationautorefname{式}%
+  \def\appendixautorefname{付録}%
+  \autoref{#1}%
+  \endgroup
+}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 3. Loading some handy packages
+% ****************************************************************************************************
+% ********************************************************************
+% Packages with options that might require adjustments
+% ********************************************************************
+\PassOptionsToPackage{ngerman,american}{babel} % change this to your language(s), main language last
+% Spanish languages need extra options in order to work with this template
+%\PassOptionsToPackage{spanish,es-lcroman}{babel}
+    \usepackage{babel}
+
+\usepackage{csquotes}
+\PassOptionsToPackage{%
+  backend=biber,%
+  bibencoding=utf8,%
+  language=auto,%
+  style=apa,%
+  sorting=nyt,%
+  maxbibnames=20,%
+  giveninits=false%
+}{biblatex}
+    \usepackage{biblatex}
+    
+    % Fix for bibliography wrapping issues with justification
+    \appto{\bibsetup}{\setlength{\emergencystretch}{3em}}
+
+\DeclareLanguageMapping{american}{american-apa}
+\DeclareLanguageMapping{english}{english-apa}
+
+% ********************************************************************
+% Custom sorting: use yomi field for Japanese entries
+% ********************************************************************
+% Map yomi to sortname for Japanese entries only
+% Biber accepts custom fields in sourcemaps without declaration
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \step[fieldsource=langid, match=japanese, final]
+      \step[fieldsource=yomi, fieldset=sortname, origfieldval]
+    }
+  }
+}
+
+% ********************************************************************
+% Japanese bibliography formatting
+% ********************************************************************
+% For Japanese entries, use:
+%   author = {細田, 衛士 and 山本, 雅資}
+%   langid = {japanese}
+%   yomi = {ほそだ, えいじ and やまもと, まさし}
+% Result: 細田衛士・山本雅資 (full name, no comma, ・ separator)
+% Sorting: Uses hiragana yomi field for alphabetical ordering
+
+% Override the low-level name format used by APA
+\DeclareNameFormat{apaauthor}{%
+  \iffieldequalstr{langid}{japanese}
+    {% Japanese: Family + Given, no comma, no abbreviation
+      \namepartfamily
+      \namepartgiven
+      % Add ・ delimiter between names, but not after the last one
+      \ifnumequal{\value{listcount}}{\value{liststop}}
+        {}
+        {・}%
+    }
+    {% Non-Japanese: standard APA format
+      \ifcase\value{uniquename}%
+        \usebibmacro{name:apa:family-given}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \or
+        \ifuseprefix
+          {\usebibmacro{name:apa:given-family}
+            {\namepartfamily}
+            {\namepartgiveni}
+            {\namepartprefix}
+            {\namepartsuffixi}}
+          {\usebibmacro{name:apa:given-family}
+            {\namepartfamily}
+            {\namepartgiveni}
+            {\namepartprefix}
+            {\namepartsuffixi}}%
+      \or
+        \usebibmacro{name:apa:family-given}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \fi
+    }%
+  \usebibmacro{name:andothers}%
+}
+
+% Use the same format for editors
+\DeclareNameAlias{apaeditor}{apaauthor}
+\DeclareNameAlias{apatranslator}{apaauthor}
+
+% Also apply to citations (labelname is used for \cite, \parencite, etc.)
+\DeclareNameFormat{labelname}{%
+  \iffieldequalstr{langid}{japanese}
+    {% Japanese: Family only for citations, with ・ delimiter
+      \namepartfamily
+      \ifnumequal{\value{listcount}}{\value{liststop}}
+        {}
+        {・}%
+    }
+    {% Non-Japanese: standard APA citation format
+      \ifcase\value{uniquename}%
+        \usebibmacro{name:family}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \or
+        \ifuseprefix
+          {\usebibmacro{name:given-family}
+            {\namepartfamily}
+            {\namepartgiveni}
+            {\namepartprefix}
+            {\namepartsuffixi}}
+          {\usebibmacro{name:given-family}
+            {\namepartfamily}
+            {\namepartgiveni}
+            {\namepartprefix}
+            {\namepartsuffixi}}%
+      \or
+        \usebibmacro{name:given-family}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \fi
+    }%
+  \usebibmacro{name:andothers}%
+}
+
+% Override delimiters for Japanese entries globally
+\DeclareDelimFormat{multinamedelim}{%
+  \iffieldequalstr{langid}{japanese}
+    {・}%
+    {\addcomma\space}%
+}
+
+\DeclareDelimFormat{finalnamedelim}{%
+  \iffieldequalstr{langid}{japanese}
+    {・}%
+    {\space\&\space}%
+}
+
+% Override "et al." to show "他" for Japanese entries
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {%
+      \iffieldequalstr{langid}{japanese}
+        {他}% Japanese: use 他 instead of et al.
+        {\printdelim{andothersdelim}\bibstring{andothers}}% Non-Japanese: use et al.
+    }
+    {}%
+}
+
+% Disable italics for Japanese titles
+\DeclareFieldFormat[article,book,inbook,incollection,inproceedings,report,thesis,unpublished]{title}{%
+  \iffieldequalstr{langid}{japanese}
+    {#1}% Japanese: no italics
+    {\mkbibemph{#1}}% Non-Japanese: use italics
+}
+
+\DeclareFieldFormat[article,book,inbook,incollection,inproceedings,report,thesis,unpublished]{journaltitle}{%
+  \iffieldequalstr{langid}{japanese}
+    {#1}% Japanese: no italics
+    {\mkbibemph{#1}}% Non-Japanese: use italics
+}
+
+\DeclareFieldFormat[article,book,inbook,incollection,inproceedings,report,thesis,unpublished]{booktitle}{%
+  \iffieldequalstr{langid}{japanese}
+    {#1}% Japanese: no italics
+    {\mkbibemph{#1}}% Non-Japanese: use italics
+}
+
+\PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
+  \usepackage{amsmath}
+
+% ********************************************************************
+% General useful packages
+% ********************************************************************
+\usepackage{graphicx} %
+\usepackage{scrhack} % fix warnings when using KOMA with listings package
+\usepackage{xspace} % to get the spacing after macros right
+\PassOptionsToPackage{printonlyused,smaller}{acronym}
+  \usepackage{acronym} % nice macros for handling all acronyms in the thesis
+  %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
+  %\renewcommand*{\acsfont}[1]{\textsc{#1}}
+  %\renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+  %\def\bflabel#1{{#1\hfill}}
+  \def\bflabel#1{{\acsfont{#1}\hfill}}
+  \def\aclabelfont#1{\acsfont{#1}}
+% ****************************************************************************************************
+%\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
+%\usetikzlibrary{external}
+%\tikzexternalize[mode=list and make, prefix=ext-tikz/]
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 4. Setup floats: tables, (sub)figures, and captions
+% ****************************************************************************************************
+\usepackage{tabularx} % better tables
+  \setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+\usepackage{subfig}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 5. Setup code listings
+% ****************************************************************************************************
+\usepackage{listings}
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{language=[LaTeX]Tex,%C++,
+  morekeywords={PassOptionsToPackage,selectlanguage},
+  keywordstyle=\color{RoyalBlue},%\bfseries,
+  basicstyle=\small\ttfamily,
+  %identifierstyle=\color{NavyBlue},
+  commentstyle=\color{Green}\ttfamily,
+  stringstyle=\rmfamily,
+  numbers=none,%left,%
+  numberstyle=\scriptsize,%\tiny
+  stepnumber=5,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  %frameround=ftff,
+  %frame=single,
+  belowcaptionskip=.75\baselineskip
+  %frame=L
+}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 6. Last calls before the bar closes
+% ****************************************************************************************************
+% ********************************************************************
+% Her Majesty herself
+% ********************************************************************
+\PassOptionsToPackage{hyperfootnotes=false}{hyperref}
+\usepackage{classicthesis}
+
+
+% ********************************************************************
+% Fine-tune hyperreferences (hyperref should be called last)
+% ********************************************************************
+\hypersetup{%
+  %draft, % hyperref's draft mode, for printing see below
+  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+  % uncomment the following line if you want to have black links (e.g., for printing)
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true, pageanchor=true,%
+  pdfpagemode=UseNone, %
+  % pdfpagemode=UseOutlines,%
+  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
+  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+  pdftitle={\myTitle},%
+  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+  pdfsubject={},%
+  pdfkeywords={},%
+  pdfcreator={pdfLaTeX},%
+  pdfproducer={LaTeX with hyperref and classicthesis}%
+}
+% ********************************************************************
+% Setup autoreferences (hyperref and babel)
+% ********************************************************************
+% There are some issues regarding autorefnames
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
+% you have to redefine the macros for the
+% language you use, e.g., american, ngerman
+% (as chosen when loading babel/AtBeginDocument)
+% ********************************************************************
+ \makeatletter
+ \@ifpackageloaded{babel}%
+   {%
+     \addto\extrasamerican{%
+       \renewcommand*{\figureautorefname}{Figure}%
+       \renewcommand*{\tableautorefname}{Table}%
+       \renewcommand*{\partautorefname}{Part}%
+       \renewcommand*{\chapterautorefname}{Chapter}%
+       \renewcommand*{\sectionautorefname}{Section}%
+       \renewcommand*{\subsectionautorefname}{Section}%
+       \renewcommand*{\subsubsectionautorefname}{Section}%
+       \renewcommand*{\figurename}{図}%
+       \renewcommand*{\tablename}{表}%
+     }%
+     \addto\extrasngerman{%
+       \renewcommand*{\paragraphautorefname}{Absatz}%
+       \renewcommand*{\subparagraphautorefname}{Unterabsatz}%
+       \renewcommand*{\footnoteautorefname}{Fu\"snote}%
+       \renewcommand*{\FancyVerbLineautorefname}{Zeile}%
+       \renewcommand*{\theoremautorefname}{Theorem}%
+       \renewcommand*{\appendixautorefname}{Anhang}%
+       \renewcommand*{\equationautorefname}{Gleichung}%
+       \renewcommand*{\itemautorefname}{Punkt}%
+     }%
+       % Fix to getting autorefs for subfigures right (thanks to Belinda Vogt for changing the definition)
+       \providecommand{\subfigureautorefname}{\figureautorefname}%
+     }{\relax}
+ \makeatother
+
+% (Better) alternative to \autoref is \cref via the cleveref package
+%\usepackage{cleveref}
+%\crefformat{part}{Part #2\MakeUppercase{#1}#3}
+
+
+% ********************************************************************
+% Development Stuff
+% ********************************************************************
+\listfiles
+%\PassOptionsToPackage{l2tabu,orthodox,abort}{nag}
+%  \usepackage{nag}
+%\PassOptionsToPackage{warning, all}{onlyamsmath}
+%  \usepackage{onlyamsmath}
+
+
+% ****************************************************************************************************
+% 7. Further adjustments (experimental)
+% ****************************************************************************************************
+% ********************************************************************
+% Changing the text area
+% ********************************************************************
+%\areaset[current]{312pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip
+%\setlength{\marginparwidth}{7em}%
+%\setlength{\marginparsep}{2em}%
+
+% ********************************************************************
+% Using different fonts
+% ********************************************************************
+%\usepackage[oldstylenums]{kpfonts} % oldstyle notextcomp
+% \usepackage[osf]{libertine}
+%\usepackage[light,condensed,math]{iwona}
+%\renewcommand{\sfdefault}{iwona}
+%\usepackage{lmodern} % <-- no osf support :-(
+%\usepackage{cfr-lm} %
+%\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
+%\usepackage[default,osfigures]{opensans} % scale=0.95
+%\usepackage[sfdefault]{FiraSans}
+% \usepackage[opticals,mathlf]{MinionPro} % onlytext
+% ********************************************************************
+%\usepackage[largesc,osf]{newpxtext}
+%\linespread{1.05} % a bit more for Palatino
+% Used to fix these:
+% https://bitbucket.org/amiede/classicthesis/issues/139/italics-in-pallatino-capitals-chapter
+% https://bitbucket.org/amiede/classicthesis/issues/45/problema-testatine-su-classicthesis-style
+% ********************************************************************
+% ****************************************************************************************************

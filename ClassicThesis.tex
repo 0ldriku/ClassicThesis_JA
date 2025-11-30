@@ -1,0 +1,209 @@
+% **************************************************************************************************************
+% A Classic Thesis Style (Modified Version)
+% An Homage to The Elements of Typographic Style
+%
+% Original Copyright (C) 2025 André Miede and Ivo Pletikosić
+%
+% This is a modified version with enhancements for:
+% - APA 7th edition citation style
+% - Enhanced Japanese/CJK language support via XeLaTeX
+% - Custom Japanese author name formatting
+% - Japanese reference sorting capabilities
+%
+% Modifications are shared under the same GPL license as the original work.
+%
+% Original template: https://ctan.org/pkg/classicthesis
+% If you like the original style, the authors appreciate postcards at:
+% http://postcards.miede.de
+%
+% License:
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program; see the file COPYING.  If not, write to
+% the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+% Boston, MA 02111-1307, USA.
+%
+% PLEASE SEE ALSO THE AUTHORS' NOTE REGARDING THIS LICENSE
+% IN THE DOCUMENTATION (Chapter 3 / Chapter03.tex - License and Attribution section)
+% **************************************************************************************************************
+\RequirePackage{silence} % :-\
+    \WarningFilter{scrreprt}{Usage of package `titlesec'}
+    %\WarningFilter{scrreprt}{Activating an ugly workaround}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
+\documentclass[ twoside,openright,titlepage,numbers=noenddot,%1headlines,
+                headinclude,footinclude,cleardoublepage=empty,abstract=on,
+                BCOR=5mm,paper=a4,fontsize=11pt
+                ]{scrbook}
+
+%********************************************************************
+% Note: Make all your adjustments in here
+%*******************************************************
+\input{classicthesis-config}
+\setlength{\emergencystretch}{3em}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{siunitx}
+\usepackage{rotating}
+\usepackage{xurl}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{colortbl}       
+\usepackage{array}         
+
+
+\definecolor{headerblue}{RGB}{52, 73, 94}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+\ifPDFTeX
+  \usepackage{CJKutf8}
+  \usepackage{ipaex-type1}
+  \usepackage[whole]{bxcjkjatype}
+\else % Use this for XeLaTeX, especially for Japanese-heavy documents
+  \usepackage{xeCJK}
+  \setsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP}
+  \setCJKmainfont[
+    SmallCapsFont = Noto Sans CJK JP,  % Japanese in \section (SmallCaps) -> Gothic
+    ItalicFont = Noto Sans CJK JP,      % Japanese in \subsection (Italic) -> Gothic
+    BoldFont=Noto Serif CJK JP Bold
+]{Noto Serif CJK JP}
+  \setCJKsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP}
+  \setCJKmonofont[BoldFont=Noto Sans Mono CJK JP Bold]{Noto Sans Mono CJK JP}% Default fonts, can be customized
+
+  % Define Medium weight font for headers
+  \newfontfamily\headerLatin{Noto Sans CJK JP}[UprightFont=*-Medium]
+  \newCJKfontfamily\headerCJK{Noto Sans CJK JP}[UprightFont=*-Medium]
+  \newcommand{\myHeaderFont}{\headerLatin\headerCJK}
+
+  % Define Chapter Font (Noto Sans CJK JP Medium)
+  \newfontfamily\chapterLatin{Noto Serif CJK JP}[UprightFont=*-Medium]
+  \newCJKfontfamily\chapterCJK{Noto Serif CJK JP}[UprightFont=*-Medium]
+  \newcommand{\myChapterFont}{\chapterLatin\chapterCJK}
+
+  % Define Scalable Chapter Number Font (Palatino)
+  \newfontface\myChapterNumberFont{texgyrepagella-regular}[Extension= .otf]
+
+  % Define Light Sans font for captions
+  \newfontfamily\captionLightLatin{Noto Sans CJK JP Light}
+  \newCJKfontfamily\captionLightCJK{Noto Sans CJK JP Light}
+  \newcommand{\captionLightFont}{\captionLightLatin\captionLightCJK}
+
+  % 1. Define Simplified Chinese (SC)
+\newCJKfontfamily\schinesefont{Noto Serif CJK SC}[
+  Script=CJK,
+  Language=Chinese Simplified
+]
+
+% 2. Define Traditional Chinese (TC) - Optional if you need it
+\newCJKfontfamily\tchinesefont{Noto Serif CJK TC}[
+  Script=CJK,
+  Language=Chinese Traditional
+]
+
+% 3. Define Korean (KR)
+\newCJKfontfamily\koreanfont{Noto Serif CJK KR}[
+  Script=CJK,
+  Language=Korean
+]
+
+\xeCJKDeclareCharClass{CJK}{`①,`⑵,`Ⅲ,`☃} 
+
+\fi
+
+\newcommand{\textzhtc}[1]{{\tchinesefont #1}} % for Traditional Chinese
+\newcommand{\textzh}[1]{{\schinesefont #1}} % for Simplified Chinese
+\newcommand{\textko}[1]{{\koreanfont #1}}   % for Korean
+
+
+%********************************************************************
+% Bibliographies
+%*******************************************************
+\addbibresource{Bibliography.bib}
+\addbibresource[label=part1]{part1.bib}
+\addbibresource[label=part2]{part2.bib}
+% Additional bibliography files can be added here as needed
+
+%********************************************************************
+% Hyphenation
+%*******************************************************
+%\hyphenation{put special hyphenation here}
+
+% ********************************************************************
+% GO!GO!GO! MOVE IT!
+%*******************************************************
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{american} % american ngerman
+%\renewcommand*{\bibname}{new name}
+%\setbibpreamble{}
+\pagenumbering{roman}
+\pagestyle{plain}
+%********************************************************************
+% Frontmatter
+%*******************************************************
+%\include{FrontBackmatter/DirtyTitlepage}
+%\include{FrontBackmatter/VersionHistory}
+
+\include{FrontBackmatter/Titlepage}
+\include{FrontBackmatter/Titleback}
+\cleardoublepage\include{FrontBackmatter/Committee}
+\cleardoublepage\include{FrontBackmatter/Dedication}
+%\cleardoublepage\include{FrontBackmatter/Foreword}
+\cleardoublepage\include{FrontBackmatter/Abstract}
+\cleardoublepage\include{FrontBackmatter/Publications}
+\cleardoublepage\include{FrontBackmatter/Acknowledgments}
+\cleardoublepage\include{FrontBackmatter/Contents}
+%********************************************************************
+% Mainmatter
+%*******************************************************
+\cleardoublepage
+\pagestyle{scrheadings}
+\pagenumbering{arabic}
+%\setcounter{page}{90}
+% use \cleardoublepage here to avoid problems with pdfbookmark
+\cleardoublepage
+\ctparttext{This part provides essential information for getting started with the template, including setup instructions and basic usage guidelines.}
+\part{Usage Guide}\label{pt:guide}
+\include{Chapters/Chapter01}
+\cleardoublepage
+
+\ctparttext{This part demonstrates various \LaTeX{} features available in this template, including formatting, citations, figures, tables, and multilingual support.}
+\part{The Showcase}\label{pt:showcase}
+\include{Chapters/Chapter02}
+\cleardoublepage
+
+\ctparttext{This part contains detailed documentation about template configuration, customization options, and technical specifications.}
+\part{Manual}\label{pt:manual}
+\include{Chapters/Chapter03}
+\cleardoublepage
+% ********************************************************************
+% Backmatter
+%*******************************************************
+\appendix
+%\renewcommand{\thechapter}{\alph{chapter}}
+\cleardoublepage
+\part{Appendix}
+\include{Chapters/Chapter0A}
+%********************************************************************
+% Other Stuff in the Back
+%*******************************************************
+\pdfbookmark[-1]{Back Matter}{back} % Dummy part bookmark for back matter
+\cleardoublepage\include{FrontBackmatter/Bibliography}
+%\cleardoublepage\include{FrontBackmatter/Declaration}
+\cleardoublepage\include{FrontBackmatter/Colophon}
+% ********************************************************************
+% Game Over: Restore, Restart, or Quit?
+%*******************************************************
+\end{document}
+% ********************************************************************

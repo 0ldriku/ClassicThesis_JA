@@ -1,0 +1,167 @@
+\chapter{はじめに　序論}
+
+
+
+論文の組版において \LaTeX やWordと格闘しておられる方も多いのではないでしょうか。
+This template is designed to help my colleagues write their theses efficiently. It is based on the \texttt{classicthesis} package version 4.8 (\url{https://ctan.org/pkg/classicthesis?lang=en}), with several customizations tailored to our writing needs.
+
+Key modifications include:
+\begin{itemize}
+    \item APA 7th edition citation style
+    \item Custom formatting for Japanese author names (using "・" delimiter between multiple authors)
+    \item Enhanced sorting capabilities for Japanese references
+    \item Improved multi-language support
+\end{itemize}
+
+This chapter provides an overview of the template's features and basic usage instructions. \autoref{ch:examples} demonstrates various \LaTeX features with practical examples, while \autoref{ch:settings} offers detailed explanations of template configuration options.
+
+\section{Quick Start (TL;DR)}
+
+\textit{Just want to start writing?} Here are the essential steps:
+
+\begin{enumerate}
+    \item \textit{Add your info}: Edit \texttt{classicthesis-config.tex} (line 54+) - fill in your name, title, department, etc.
+
+    \item \textit{Write your content}: Put your chapters in \texttt{Chapters/Chapter01.tex}, \texttt{Chapter02.tex}, etc.
+
+    \item \textit{Build your references}: Add bibliography entries to \texttt{Bibliography.bib} (or \texttt{part1.bib}, \texttt{part2.bib}, etc.)
+
+    \item \textit{Add images}: Put figures in \texttt{gfx/} folder
+
+    \item \textit{Compile}: Open the Menu (top left) and set the Compiler to XeLaTeX
+
+\end{enumerate}
+
+That's it! For detailed explanations, continue reading below.
+
+
+\section{Japanese Support}
+
+This template uses the XeLaTeX engine to provide better Japanese input support. While the original ClassicThesis template works best with pdfLaTeX, XeLaTeX offers superior multilingual capabilities, particularly for CJK (Chinese, Japanese, Korean) languages.
+
+If your thesis is primarily in English with minimal Japanese content, you may use pdfLaTeX by adding the following to your preamble:
+
+\begin{lstlisting}
+%*************************************
+\usepackage{CJKutf8}
+%*************************************
+\end{lstlisting}
+
+Then, in your document body, wrap Japanese text as follows:
+
+\begin{lstlisting}
+%*************************************
+\begin{CJK}{UTF8}{ipxm}
+    Put your Japanese text here.
+\end{CJK}
+%*************************************
+\end{lstlisting}
+
+For more information about Japanese support in \LaTeX, see \url{https://www.overleaf.com/learn/latex/Japanese}.
+
+\section{Citation Style}
+
+\subsection{English References}
+
+Build your bibliography entries following the standard BibTeX format. Below are examples of common entry types: 
+
+\begin{lstlisting}
+
+@incollection{fiorella2022,
+  author    = {Fiorella, Logan and Mayer, Richard E.},
+  title     = {The Generative Activity Principle in Multimedia Learning},
+  booktitle = {The Cambridge Handbook of Multimedia Learning},
+  editor    = {Mayer, Richard E. and Fiorella, Logan},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2022},
+  pages     = {339--350},
+  doi       = {10.1017/9781108894333.036}
+}
+
+@article{lusato2025,
+  author    = {Lu, Jialiang and Sato, Reiko},
+  title     = {Linguistic dimensions of comprehensibility and perceived fluency in {L2} speech across tasks of varying complexity},
+  journal   = {Journal of Second Language Pronunciation},
+  volume    = {11},
+  number    = {2},
+  year      = {2025},
+  pages     = {240--266},
+  doi       = {10.1075/jslp.24057.lu}
+}
+
+@book{mayer2021,
+  author    = {Mayer, Richard E.},
+  title     = {Multimedia Learning},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2020},
+  doi       = {10.1017/9781316941355}
+}
+
+@INPROCEEDINGS{Miede2011,
+    author = {Andr{\'e} Miede and G\"{o}khan \c{S}im\c{s}ek and Stefan Schulte
+    and Abawi, Daniel F. and Julian Eckert and Ralf Steinmetz},
+    title = {{R}evealing {B}usiness {R}elationships -- {E}avesdropping {C}ross-organizational
+    {C}ollaboration in the {I}nternet of {S}ervices},
+    booktitle = {Proceedings of the Tenth International Conference Wirtschaftsinformatik
+    (WI 2011)},
+    year = {2011},
+    volume = {2},
+    pages = {1083--1092},
+    isbn = {978-1-4467-9236-0}
+}
+\end{lstlisting}
+
+
+\subsection{日本語の文献}
+
+
+\begin{lstlisting}
+@article{tanaka2025,
+  title        = {ダミーとミダーの関連性についての検討},
+  author       = {田中, 太郎 and 山田, 花子},
+  journal      = {日本科学会誌},
+  volume       = {10},
+  number       = {1},
+  pages        = {10-25},
+  year         = {2025},
+  doi          = {10.1000/dummy.doi.123},
+  langid       = {japanese},
+  yomi         = {tanaka, taro and yamada, hanako}
+}
+
+@book{suzuki2024,
+  title        = {バナナの基礎と応用},
+  author       = {鈴木, 一郎},
+  publisher    = {東工大出版会},
+  address      = {東京},
+  year         = {2024},
+  langid       = {japanese},
+  yomi         = {suzuki, ichiro}
+}
+
+@inproceedings{sato2023,
+  title        = {東工大パワー丼における水菜と豚肉の配分},
+  author       = {加藤, 次郎},
+  booktitle    = {東工大学食学会第50回全国大会講演論文集},
+  pages        = {100-102},
+  year         = {2023},
+  month        = aug,
+  langid       = {japanese},
+  yomi         = {kato, jiro}
+}
+\end{lstlisting}
+
+The format of the \texttt{yomi} field determines the sorting order of the bibliography:
+
+\begin{description}
+    \item[Hiragana:] Japanese references are listed separately after English references and sorted according to the 50-on table.
+    \item[Romaji:] Japanese references are mixed with English references and sorted alphabetically.
+\end{description}
+
+
+\textit{Note:} Chinese references can also use \texttt{langid=japanese}, though they will be rendered in Japanese fonts in the bibliography. This is acceptable IMHO.
+

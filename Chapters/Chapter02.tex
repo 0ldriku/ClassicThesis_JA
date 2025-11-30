@@ -1,0 +1,465 @@
+\chapter{\LaTeX のすゝめ}\label{ch:examples}
+
+This chapter serves as a guide and template for using this thesis style. It demonstrates the most common elements you will need: sectioning, citations, figures, tables, and math.
+
+\section{環境}
+
+\subsection{見出し}
+
+\begin{lstlisting}
+%*************************************
+\part{部}
+\chapter{章} 
+\section{節}
+\subsection{項}
+\subsubsection{目}
+\paragraph{段落} %段落に見出しをつける場合
+\subparagraph{小段落} 
+%*************************************
+\section*{}、*をつけることで、番号をつけないようにできます。
+
+
+
+\end{lstlisting}
+
+\subsection{フォントサイズ}
+LaTeX provides a hierarchy of font size commands to accommodate various typographical needs within a document. The ten standard font size commands, detailed in \autoref{tab:fontsizes}, range from \texttt{\textbackslash tiny} for footnotes and subscripts to \texttt{\textbackslash Huge} for major headings and titles. These commands are relative to the document's base font size (specified in the document class options) and ensure consistent scaling throughout the document.
+
+
+
+
+
+\begin{table}[ht]
+\centering
+
+\caption{LaTeX Font Size Commands Reference}
+\renewcommand{\arraystretch}{1.8}
+% Modern column definition with better spacing
+\begin{tabular}{@{\extracolsep{8pt}}l l@{}}
+\toprule
+\rowcolor{headerblue}
+\color{white}\textbf{Command} & 
+\color{white}\textbf{Example Output} \\
+\midrule
+\rowcolor{lightgray}
+\texttt{\textbackslash tiny} & {\tiny This is tiny text} \\
+\texttt{\textbackslash scriptsize} & {\scriptsize This is scriptsize text} \\
+\rowcolor{lightgray}
+\texttt{\textbackslash footnotesize} & {\footnotesize This is footnotesize text} \\
+\texttt{\textbackslash small} & {\small This is small text} \\
+\rowcolor{lightgray}
+\texttt{\textbackslash normalsize} & {\normalsize This is normalsize text} \\
+\texttt{\textbackslash large} & {\large This is large text} \\
+\rowcolor{lightgray}
+\texttt{\textbackslash Large} & {\Large This is Large text} \\
+\texttt{\textbackslash LARGE} & {\LARGE This is LARGE text} \\
+\rowcolor{lightgray}
+\texttt{\textbackslash huge} & {\huge This is huge text} \\
+\texttt{\textbackslash Huge} & {\Huge This is Huge text} \\
+\bottomrule
+\label{tab:fontsizes}
+\end{tabular}
+
+\end{table}
+
+
+Here is a single paragraph that demonstrates the relative scales of standard LaTeX font commands. We start with {\tiny tiny text for fine details}, move up to {\scriptsize script size usually for subscripts}, and then {\footnotesize footnote size}. 
+
+Gradually, we reach {\small small text}, before returning to {\normalsize the default normal size}. To emphasize points, we can use {\large large text}, {\Large larger text for sub-titles}, or {\LARGE even larger text}. Finally, for major impacts, we use {\huge huge} and {\Huge massive sizes}.
+
+
+これはLaTeXのフォントサイズ変更コマンドを確認するための段落です。まず{\tiny 極小の文字 (tiny)}から始まり、{\scriptsize 添え字などに使うサイズ (scriptsize)}、そして{\footnotesize 脚注サイズ (footnotesize)}へと変化します。
+
+ここから{\small 少し小さな文字 (small)}になり、{\normalsize 標準のサイズ (normalsize)}に戻ります。強調したい場合は{\large やや大きな文字 (large)}、{\Large 大きな文字 (Large)}、あるいは{\LARGE さらに大きな文字 (LARGE)}を使います。見出しなどで目立たせるには{\huge 巨大な文字 (huge)}や、{\Huge 最大級の文字 (Huge)}を使用します。
+
+
+\subsection{Formatting}
+
+Examples: \textit{Italics}, \textbf{bold}, \spacedallcaps{All Caps}, \textsc{Small
+Caps}, \spacedlowsmallcaps{Low Small Caps}.
+
+Acronym testing: \ac{UML} -- \acs{UML} -- \acf{UML} -- \acp{UML}
+
+
+
+\subsection{Lists}
+Here is an itemized list:
+\begin{itemize}
+    \item First item
+    \item Second item
+\end{itemize}
+
+Here is an enumerated list:
+\begin{enumerate}
+    \item First step
+    \item Second step
+\end{enumerate}
+
+Here is an description list:
+
+\begin{description}
+    \item[item 1:] First step
+    \item[item 2:] Second step
+\end{description}
+
+
+\subsection{Quote}
+\begin{quote}
+    Similar patterns regarding information retention have been observed in cross-platform rendering engines.
+\end{quote}
+
+\section{Citations}
+This template uses \texttt{biblatex} with APA style.
+
+\begin{description}
+    
+    \item[Parenthetical citation:] \parencite{fiorella2022}.
+    \item[Textual citation:] \textcite{fiorella2022} found that...
+    \item[Multiple citations:] \parencite{fiorella2022}.
+    \item[Cite year, author:] \citeauthor{fiorella2022}'s (\citeyear{fiorella2022})
+\end{description}
+
+
+
+The cafeteria was loud, but my focus was singular. I stared at the legendary dish before me: the Tokyo Tech Power Bowl (東工大パワー丼). While many consume it blindly, I sought to understand its structural integrity.
+
+As \textcite{sato2023} famously argued in their seminal paper on cafeteria dynamics, the precise allocation of Mizuna greens to grilled pork is not merely a culinary choice, but a mathematical necessity. I picked up my chopsticks, ready to verify their findings.
+
+To analyze the bowl properly, I needed to minimize cognitive load. I applied the principles of \citeauthor{mayer2021}, who established in \citeyear{mayer2021} that people learn better from words and pictures than from words alone. Therefore, I took a picture of the bowl before eating it.
+
+Digging deeper into the rice, I suspected a hidden network of flavors. It felt almost illicit, like the "eavesdropping" techniques described by \textcite{Miede2011} in the context of business relationships. Was the garlic sauce communicating secretly with the pork?
+
+I also considered the possibility of a secret ingredient. \textcite{suzuki2024} recently published a comprehensive guide on bananas. Could there be a banana hidden in the Power Bowl? A quick taste test confirmed: definitely not.
+
+
+The energy density of this meal is high. According to the generative activity principle discussed by \textcite{fiorella2022}, learning—or in this case, digestion—is a generative process.
+
+However, one must be careful not to confuse correlation with causation. As \textcite{tanaka2025} warn in their study on dummy variables, what looks like a piece of pork might actually be a cleverly disguised piece of fried garlic (a culinary "dummy" variable, if you will).
+
+
+The mystery remains partially unsolved. While \citeauthor{sato2023}'s theory on the Mizuna-Pork ratio holds true (\citeyear{sato2023}), the emotional impact of the Power Bowl transcends academic citation.
+
+\section{Symbols}
+
+Refer to \autoref{tab:symbols} for the correct input codes, noting that the most common cause of compilation errors is the unescaped use of the ampersand (\&).
+
+
+\begin{table}[ht]
+\centering
+\caption{Common LaTeX Symbols Reference}
+\renewcommand{\arraystretch}{1.5}
+% Modern column definition with better spacing
+\begin{tabular}{@{\extracolsep{4pt}}l c l c l c@{}}
+\toprule
+\rowcolor{headerblue}
+\color{white}\textbf{Input} & \color{white}\textbf{Output} & 
+\color{white}\textbf{Input} & \color{white}\textbf{Output} & 
+\color{white}\textbf{Input} & \color{white}\textbf{Output} \\
+\midrule
+\rowcolor{lightgray}
+\texttt{\textbackslash\%} & \% & 
+\texttt{\textbackslash\$} & \$ & 
+\texttt{\textbackslash\&} & \& \\
+\texttt{\textbackslash\{} & \{ & 
+\texttt{\textbackslash\}} & \} & 
+\texttt{\textbackslash\#} & \# \\
+\midrule
+\rowcolor{lightgray}
+\texttt{\$\textbackslash alpha\$} & $\alpha$ & 
+\texttt{\$\textbackslash theta\$} & $\theta$ & 
+\texttt{\$\textbackslash pi\$} & $\pi$ \\
+
+\texttt{\$\textbackslash Gamma\$} & $\Gamma$ & 
+\texttt{\$\textbackslash Delta\$} & $\Delta$ & 
+\texttt{\$\textbackslash Phi\$} & $\Phi$ \\
+\bottomrule
+\label{tab:symbols}
+\end{tabular}
+\end{table}
+
+\section{Page Break}
+
+Commands to perform a page break include {\textbackslash}pagebreak, {\textbackslash}newpage, and {\textbackslash}clearpage. Although the specific usage differs for each command, they are basically used to initiate a new page.
+
+\newpage
+
+\section{Figures}
+Figures should be placed in the \texttt{gfx/} folder.
+
+\begin{figure}[htbp]
+    \centering
+    % Using a standard example image if your specific image isn't available
+    \includegraphics[width=0.26\textwidth]{gfx/example_1.jpg} 
+    \caption{Example of a single figure.}
+    \label{fig:example-single}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_1.jpg}
+        \caption*{(a) First figure}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_2.jpg}
+        \caption*{(b) Second figure}
+    \end{minipage}
+    
+    \vspace{1em}
+    
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_3.jpg}
+        \caption*{(c) Third figure}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_4.jpg}
+        \caption*{(d) Fourth figure}
+    \end{minipage}
+    
+    \caption{Overall caption for all four figures}
+    \label{fig:all}
+\end{figure}
+
+
+\newpage
+
+\section{Tables}
+Use \texttt{booktabs} for professional quality tables and \texttt{tabularx} for width control.
+
+\begin{table}[ht]
+    \centering
+    \footnotesize
+    \caption{Example table with booktabs}
+    \label{tab:example}
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Column 1} & \textbf{Column 2 (Flexible Width)} \\
+        \midrule
+        Item A & Description of Item A which might be long and wrap to the next line. \\
+        Item B & Description of Item B. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Electronics inventory with booktabs styling}
+
+\begin{tabular}{lccr}
+\toprule
+
+\textbf{Product} & \textbf{Category} & \textbf{Stock} & \textbf{Price (\$)} \\
+\midrule
+MacBook Pro 16" & Laptop & 45 & 2,499 \\
+Dell XPS 15 & Laptop & 32 & 1,799 \\
+ThinkPad X1 Carbon & Laptop & 28 & 1,899 \\
+\midrule
+Magic Mouse 2 & Accessory & 156 & 79 \\
+Logitech MX Master 3 & Accessory & 203 & 99 \\
+Razer DeathAdder V2 & Accessory & 87 & 69 \\
+\midrule
+Mechanical Keyboard & Peripheral & 64 & 129 \\
+Wireless Keyboard & Peripheral & 91 & 59 \\
+Gaming Keyboard RGB & Peripheral & 43 & 159 \\
+\midrule
+27" 4K Monitor & Display & 38 & 549 \\
+34" Ultrawide Monitor & Display & 22 & 899 \\
+32" Gaming Monitor & Display & 29 & 699 \\
+\midrule
+USB-C Hub & Adapter & 245 & 49 \\
+Thunderbolt Dock & Adapter & 67 & 279 \\
+HDMI Cable 10ft & Cable & 412 & 15 \\
+\bottomrule
+\end{tabular}
+\label{tab:inventory}
+\end{table}
+
+
+\begin{table*}[ht]
+  \centering
+  \setlength{\tabcolsep}{1.5pt} % default is 6pt
+
+  \caption{An example of a long table}
+  \label{tab:metrics}
+  \footnotesize
+  \setlength{\tabcolsep}{2pt}
+  \begin{threeparttable}
+    % Use S columns defined with Mean(SD) format
+    % We need to find the max format for each column across the *whole* table
+    % Col 1 (Hist 1 Sim, Sci 1 Sim): Max is 2.2(2.2)
+    % Col 2 (Hist 1 Com, Sci 1 Com): Max is 3.2(2.2) (due to '100')
+    % Col 3 (Hist 2 Sim, Sci 2 Sim): Max is 2.2(2.2) (due to 15.81)
+    % Col 4 (Hist 2 Com, Sci 2 Com): Max is 2.2(2.2)
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}
+      l@{\extracolsep{\fill}} 
+      S[table-format=2.2(2.2)]
+      S[table-format=3.2(2.2)]
+      S[table-format=2.2(2.2)]
+      S[table-format=2.2(2.2)]
+    }
+      \toprule
+      % History 1 and 2
+      & \multicolumn{2}{c}{\textsc{History 1}}
+      & \multicolumn{2}{c}{\textsc{History 2}} \\
+      \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+      % These are already \multicolumn, so they override 'S' and center
+      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}}
+      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}} \\
+    \midrule
+    %------ Syntactic block ------%
+    \addlinespace
+    \multicolumn{5}{@{}l}{\textit{Syntactic Complexity}} \\
+    Sentences (\emph{N})                  & 27   & 28   & 30   & 29   \\
+    Sentence length (tokens)              & 24.44 (12.52) & 46.07 (22.36) & 24.77 (9.06) & 47.83 (23.11) \\
+    Max sentence length                   & 54   & 100  & 43   & 95   \\
+    Parse-tree height                     & 4.15 (2.03) & 7.04 (3.01) & 4.43 (1.57) & 7.34 (3.14) \\
+    Mean dependency distance              & 2.62 (0.59) & 3.27 (0.88) & 2.82 (0.40) & 3.19 (0.50) \\
+
+    %------ Lexical block ------%
+    \addlinespace
+    \multicolumn{5}{@{}l}{\textit{Lexical Complexity}} \\
+    High-frequency tokens (\%) & 17.74 & 14.45 & 17.01 & 13.90 \\
+    Mid-frequency tokens (\%)  & 22.91 & 26.38 & 19.50 & 21.07 \\
+    Low-frequency tokens (\%)  &  3.92 &  5.77 &  5.94 &  7.75 \\
+    \midrule
+    %------ Science 1 and 2 ------%
+    & \multicolumn{2}{c}{\textsc{Science 1}}
+      & \multicolumn{2}{c}{\textsc{Science 2}} \\
+      \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}}
+      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}} \\
+    \midrule
+    %------ Syntactic block ------%
+    \addlinespace
+    \multicolumn{5}{@{}l}{\textit{Syntactic Complexity}} \\
+    Sentences (\emph{N})                  & 26   & 22   & 23   & 25   \\
+    Sentence length (tokens)              & 26.31 (7.91) & 57.23 (16.63) & 32.35 (15.81) & 50.32 (19.15) \\
+    Max sentence length                   & 45   & 94   & 87   & 99   \\
+    Parse-tree height                     & 5.23 (1.34) & 8.82 (2.30) & 5.61 (1.83) & 8.76 (2.85) \\
+    Mean dependency distance              & 2.90 (0.62) & 2.99 (0.76) & 2.91 (0.51) & 3.12 (0.66) \\
+
+    %------ Lexical block ------%
+    \addlinespace
+    \multicolumn{5}{@{}l}{\textit{Lexical Complexity}} \\
+    High-frequency tokens (\%) & 14.24 & 13.40 & 14.37 & 16.80 \\
+    Mid-frequency tokens (\%)  & 26.36 & 27.05 & 27.75 & 29.30 \\
+    Low-frequency tokens (\%)  &  8.94 &  8.77 &  4.46 &  4.46 \\
+    \bottomrule
+    \end{tabular*}
+    \begin{tablenotes}[flushleft]
+      \footnotesize
+      \item \emph{Note.} Values in parentheses represent standard deviations. Most metrics show means across sentences, except counts and maximum values.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table*}
+
+\clearpage
+
+\section{Mathematics}
+Equations can be inline $E=mc^2$ or displayed:
+
+\begin{equation}
+    \label{eq:example}
+    f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2\pi i \xi x} \,d\xi
+\end{equation}
+
+For multi-line equations, use \texttt{align}:
+\begin{align}
+    a &= b + c \\
+    &= d + e
+\end{align}
+
+\section{Cross-Referencing}
+You can reference chapters (\autoref{ch:examples}), figures (\autoref{fig:example-single}), tables (\autoref{tab:example}), and equations (\autoref{eq:example}) automatically.
+
+For Japanese articles, you can use \texttt{autorefja} to reference  figures (\autorefja{fig:example-single}), tables (\autorefja{tab:example}), and equations (\autorefja{eq:example}) automatically.
+
+Alternatively, you can reference items manually: chapters (第\ref{ch:examples}章) or sections (\S\ref{sec:otherlanguages}).
+
+
+\section{日本語の場合}
+
+\subsection{普通の日本語}
+吾輩は\textbf{猫}である。名前はまだ無い。
+
+どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕まえて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶だ。その後猫にもだいぶ逢ったがこんな片輪には一度も出会した事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙を吹く。どうも咽ぽくて実に弱った。これが人間の飲む煙草というものである事はようやくこの頃知った。
+
+①⑵Ⅲ㍾㍽㍼㍻㋿です。
+
+1.1.1.1 テストテストenglish
+
+
+1.1
+
+
+
+\subsection{日本語のフォント}
+
+\subsubsection{Mainfont}
+
+吾輩は猫である。名前はまだ無い。
+
+\noindent
+\textbf{吾輩は猫である。名前はまだ無い。}
+
+\subsubsection{Sansfont}
+
+
+\textsf{吾輩は猫である。名前はまだ無い。 test english 1.1.1.1   35.5}
+
+\noindent
+\textsf{\textbf{吾輩は猫である。名前はまだ無い。 this is a test fot the font Sansfont}}
+
+
+\subsubsection{Monofont}
+
+\texttt{吾輩は猫である。名前はまだ無い。}
+
+\noindent
+\texttt{\textbf{吾輩は猫である。名前はまだ無い。}}
+
+
+\vspace{1cm}
+
+日本語のフォントの指定は\texttt{classicthesis-config.tex}の以下の部分で変更できます。
+
+\begin{lstlisting}
+  %*************************************
+  \usepackage{xeCJK}
+  \setCJKmainfont{Noto Serif CJK JP}
+  \setCJKsansfont{Noto Sans CJK JP}
+  \setCJKmonofont{Noto Sans Mono CJK JP}
+  %*************************************
+\end{lstlisting}
+
+Overleaf で使用できる和文フォントの一覧は次の記事にあります。
+
+\url{https://www.overleaf.com/learn/latex/Questions/Which_OTF_or_TTF_fonts_are_supported_via_fontspec%3F#Japanese}
+
+\subsection{Other Languages}\label{sec:otherlanguages}
+
+
+
+\paragraph{Simplified Chinese}
+\textzh{海客谈瀛洲，烟涛微茫信难求。 越人语天姥，云霞明灭或可睹。 天姥连天向天横，势拔五岳掩赤城。}
+
+\paragraph{Traditional Chinese}
+\textzhtc{海客談瀛洲，煙濤微茫信難求。 越人語天姥，雲霞明滅或可覩。 天姥連天向天橫，勢拔五嶽掩赤城。}
+
+\paragraph{Japanese}
+海客瀛洲を談ず、煙濤微茫にして信に求め難しと。越人天姥を語る、雲霓明滅或は睹る可しと。天姥天に連なり天に向って橫たはる、勢は五嶽を拔き赤城を掩ふ。
+
+\paragraph{Korean}
+\textko{
+해객담영주 연도미망신난구 월인어천모 운예명멸혹가도 천모연천향천횡 세발오악엄적성}
+
+

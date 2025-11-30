@@ -1,0 +1,61 @@
+%*******************************************************
+% Thesis Committee
+%*******************************************************
+\pdfbookmark[1]{Thesis Committee}{ThesisCommittee}
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+
+\thispagestyle{plain}
+\phantomsection
+
+\chapter*{Thesis Committee}
+
+\newcommand{\CommitteeHeading}[1]{%
+  {\large\spacedlowsmallcaps{#1}}\par
+  \medskip
+}
+
+\newcommand{\CommitteePerson}[2]{%
+  {\bfseries #1}\par
+  {\itshape #2}\par
+}
+
+\begin{flushright}
+\CommitteeHeading{Thesis Supervisor}
+\CommitteePerson{Firstname Lastname}{Professor\\%
+Department of Social and Human Sciences\\%
+Institute of Science Tokyo}
+
+\vspace{2\baselineskip}
+
+\CommitteeHeading{Thesis Readers}
+
+
+\CommitteePerson{Firstname Lastname}{Professor\\%
+Department of Social and Human Sciences\\%
+Institute of Science Tokyo}
+
+
+\medskip
+
+\CommitteePerson{Firstname Lastname}{Professor\\%
+Department of Social and Human Sciences\\%
+Institute of Science Tokyo}
+
+\medskip
+
+\CommitteePerson{Firstname Lastname}{Lecturer\\%
+Department of Social and Human Sciences\\%
+Institute of Science Tokyo}
+
+
+\medskip
+
+\CommitteePerson{Firstname Lastname}{Lecturer\\%
+Department of Social and Human Sciences\\%
+Institute of Science Tokyo}
+
+\end{flushright}
+
+\endgroup
