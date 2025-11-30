@@ -71,13 +71,18 @@
   \usepackage[whole]{bxcjkjatype}
 \else % Use this for XeLaTeX, especially for Japanese-heavy documents
   \usepackage{xeCJK}
+  \setmainfont[Ligatures=TeX,Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic]{texgyretermes}
   \setsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP}
   \setCJKmainfont[
+    %Scale=MatchLowercase,
     SmallCapsFont = Noto Sans CJK JP,  % Japanese in \section (SmallCaps) -> Gothic
     ItalicFont = Noto Sans CJK JP,      % Japanese in \subsection (Italic) -> Gothic
     BoldFont=Noto Serif CJK JP Bold
 ]{Noto Serif CJK JP}
-  \setCJKsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP}
+  \setCJKsansfont[
+    Scale=MatchLowercase,
+    BoldFont=Noto Sans CJK JP Bold
+]{Noto Sans CJK JP}
   \setCJKmonofont[BoldFont=Noto Sans Mono CJK JP Bold]{Noto Sans Mono CJK JP}% Default fonts, can be customized
 
   % Define Medium weight font for headers
@@ -116,7 +121,8 @@
   Language=Korean
 ]
 
-\xeCJKDeclareCharClass{CJK}{`①,`⑵,`Ⅲ,`☃} 
+\xeCJKDeclareCharClass{CJK}{`①,`⑵,`Ⅲ,`☃,}
+%`1,`2,`3,`4,`5,`6,`7,`8,`9,`0} 
 
 \fi
 
@@ -206,4 +212,5 @@
 % Game Over: Restore, Restart, or Quit?
 %*******************************************************
 \end{document}
+% ********************************************************************
 % ********************************************************************

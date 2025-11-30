@@ -1,6 +1,6 @@
 \chapter{\LaTeX のすゝめ}\label{ch:examples}
 
-This chapter serves as a guide and template for using this thesis style. It demonstrates the most common elements you will need: sectioning, citations, figures, tables, and math.
+本章は、この論文スタイルの使用ガイドおよびテンプレートとして機能します。セクション分け、引用、図、表、数式など、必要となる最も一般的な要素の実例を示します。
 
 \section{環境}
 
@@ -23,7 +23,7 @@ This chapter serves as a guide and template for using this thesis style. It demo
 \end{lstlisting}
 
 \subsection{フォントサイズ}
-LaTeX provides a hierarchy of font size commands to accommodate various typographical needs within a document. The ten standard font size commands, detailed in \autoref{tab:fontsizes}, range from \texttt{\textbackslash tiny} for footnotes and subscripts to \texttt{\textbackslash Huge} for major headings and titles. These commands are relative to the document's base font size (specified in the document class options) and ensure consistent scaling throughout the document.
+LaTeX は、文書内の様々な組版上のニーズに対応するために、フォントサイズコマンドの階層を提供しています。\autoref{tab:fontsizes} に詳述されている10個の標準フォントサイズコマンドは、脚注や添え字用の \texttt{\textbackslash tiny} から、主要な見出しやタイトル用の \texttt{\textbackslash Huge} まで多岐にわたります。これらのコマンドは、文書の基本フォントサイズ（ドキュメントクラスのオプションで指定）に対する相対的なサイズであり、文書全体を通して一貫したスケーリングを保証します。
 
 
 
@@ -32,14 +32,14 @@ LaTeX provides a hierarchy of font size commands to accommodate various typograp
 \begin{table}[ht]
 \centering
 
-\caption{LaTeX Font Size Commands Reference}
+\caption{LaTeX フォントサイズコマンド一覧}
 \renewcommand{\arraystretch}{1.8}
 % Modern column definition with better spacing
 \begin{tabular}{@{\extracolsep{8pt}}l l@{}}
 \toprule
 \rowcolor{headerblue}
-\color{white}\textbf{Command} & 
-\color{white}\textbf{Example Output} \\
+\color{white}\textbf{コマンド} & 
+\color{white}\textbf{出力例} \\
 \midrule
 \rowcolor{lightgray}
 \texttt{\textbackslash tiny} & {\tiny This is tiny text} \\
@@ -62,7 +62,6 @@ LaTeX provides a hierarchy of font size commands to accommodate various typograp
 
 \end{table}
 
-
 Here is a single paragraph that demonstrates the relative scales of standard LaTeX font commands. We start with {\tiny tiny text for fine details}, move up to {\scriptsize script size usually for subscripts}, and then {\footnotesize footnote size}. 
 
 Gradually, we reach {\small small text}, before returning to {\normalsize the default normal size}. To emphasize points, we can use {\large large text}, {\Large larger text for sub-titles}, or {\LARGE even larger text}. Finally, for major impacts, we use {\huge huge} and {\Huge massive sizes}.
@@ -72,89 +71,89 @@ Gradually, we reach {\small small text}, before returning to {\normalsize the de
 
 ここから{\small 少し小さな文字 (small)}になり、{\normalsize 標準のサイズ (normalsize)}に戻ります。強調したい場合は{\large やや大きな文字 (large)}、{\Large 大きな文字 (Large)}、あるいは{\LARGE さらに大きな文字 (LARGE)}を使います。見出しなどで目立たせるには{\huge 巨大な文字 (huge)}や、{\Huge 最大級の文字 (Huge)}を使用します。
 
+\subsection{書式設定}
 
-\subsection{Formatting}
-
-Examples: \textit{Italics}, \textbf{bold}, \spacedallcaps{All Caps}, \textsc{Small
-Caps}, \spacedlowsmallcaps{Low Small Caps}.
+\textit{Italics}、\textbf{bold}、\spacedallcaps{All Caps}、\textsc{Small Caps}、\spacedlowsmallcaps{Low Small Caps}。
 
 Acronym testing: \ac{UML} -- \acs{UML} -- \acf{UML} -- \acp{UML}
 
 
 
-\subsection{Lists}
-Here is an itemized list:
+\subsection{リスト}
+箇条書きリストの例:
 \begin{itemize}
-    \item First item
-    \item Second item
+    \item 最初の項目
+    \item 2番目の項目
 \end{itemize}
 
-Here is an enumerated list:
+\vspace{1cm}
+\noindent 番号付きリストの例:
 \begin{enumerate}
-    \item First step
-    \item Second step
+    \item 最初の手順
+    \item 2番目の手順
 \end{enumerate}
 
-Here is an description list:
+\vspace{1cm}
+\noindent 説明リストの例:
 
 \begin{description}
-    \item[item 1:] First step
-    \item[item 2:] Second step
+    \item[項目 1:] 最初の手順
+    \item[項目 2:] 2番目の手順
 \end{description}
 
 
-\subsection{Quote}
+\subsection{引用}
 \begin{quote}
-    Similar patterns regarding information retention have been observed in cross-platform rendering engines.
+    情報保持に関する同様のパターンが、クロスプラットフォームのレンダリングエンジンにおいても観察されています。
 \end{quote}
 
-\section{Citations}
-This template uses \texttt{biblatex} with APA style.
+\section{参考文献}
+本テンプレートでは、APA スタイルの \texttt{biblatex} を使用しています。
 
 \begin{description}
     
-    \item[Parenthetical citation:] \parencite{fiorella2022}.
-    \item[Textual citation:] \textcite{fiorella2022} found that...
-    \item[Multiple citations:] \parencite{fiorella2022}.
-    \item[Cite year, author:] \citeauthor{fiorella2022}'s (\citeyear{fiorella2022})
+    \item[括弧付き引用:] \parencite{fiorella2022}.
+    \item[文中引用:] \textcite{fiorella2022} は...を発見した。
+    \item[複数の引用:] \parencite{fiorella2022}.
+    \item[著者と年:] \citeauthor{fiorella2022} の (\citeyear{fiorella2022})
 \end{description}
 
 
 
-The cafeteria was loud, but my focus was singular. I stared at the legendary dish before me: the Tokyo Tech Power Bowl (東工大パワー丼). While many consume it blindly, I sought to understand its structural integrity.
+食堂は騒がしかったが、私の集中力は一点に注がれていた。目の前にある伝説の料理、東工大パワー丼を見つめていた。多くの者が盲目的にそれを消費する中、私はその構造的完全性を理解しようと試みた。
 
-As \textcite{sato2023} famously argued in their seminal paper on cafeteria dynamics, the precise allocation of Mizuna greens to grilled pork is not merely a culinary choice, but a mathematical necessity. I picked up my chopsticks, ready to verify their findings.
+\textcite{sato2023} が食堂力学に関する独創的な論文で主張したように、水菜と焼肉の正確な配分は単なる料理上の選択ではなく、数学的必然である。私は箸を手に取り、彼らの発見を検証する準備をした。
 
-To analyze the bowl properly, I needed to minimize cognitive load. I applied the principles of \citeauthor{mayer2021}, who established in \citeyear{mayer2021} that people learn better from words and pictures than from words alone. Therefore, I took a picture of the bowl before eating it.
+丼を適切に分析するためには、認知的負荷を最小限に抑える必要があった。私は \citeauthor{mayer2021} の原則を適用した。彼は \citeyear{mayer2021} に、人は言葉だけよりも言葉と絵からより良く学ぶことを確立している。したがって、私は食べる前に丼の写真を撮った。
 
-Digging deeper into the rice, I suspected a hidden network of flavors. It felt almost illicit, like the "eavesdropping" techniques described by \textcite{Miede2011} in the context of business relationships. Was the garlic sauce communicating secretly with the pork?
+ご飯を掘り進めると、隠された味のネットワークが疑われた。それはまるで、\textcite{Miede2011} がビジネス関係の文脈で記述した「盗聴」技術のように、どこか背徳的な感じがした。ガーリックソースは豚肉と密かに通信していたのだろうか？
 
-I also considered the possibility of a secret ingredient. \textcite{suzuki2024} recently published a comprehensive guide on bananas. Could there be a banana hidden in the Power Bowl? A quick taste test confirmed: definitely not.
-
-
-The energy density of this meal is high. According to the generative activity principle discussed by \textcite{fiorella2022}, learning—or in this case, digestion—is a generative process.
-
-However, one must be careful not to confuse correlation with causation. As \textcite{tanaka2025} warn in their study on dummy variables, what looks like a piece of pork might actually be a cleverly disguised piece of fried garlic (a culinary "dummy" variable, if you will).
+私は隠し味の可能性も考慮した。\textcite{suzuki2024} は最近、バナナに関する包括的なガイドを出版した。パワー丼の中にバナナが隠されている可能性はあるだろうか？迅速な味覚テストの結果、間違いなくそうではないことが確認された。
 
 
-The mystery remains partially unsolved. While \citeauthor{sato2023}'s theory on the Mizuna-Pork ratio holds true (\citeyear{sato2023}), the emotional impact of the Power Bowl transcends academic citation.
+この食事のエネルギー密度は高い。\textcite{fiorella2022} によって論じられた生成的活動の原則によれば、学習---この場合は消化---は生成的なプロセスである。
 
-\section{Symbols}
+しかし、相関関係と因果関係を混同しないように注意しなければならない。\textcite{tanaka2025} がダミー変数に関する研究で警告しているように、豚肉のように見えるものが、実は巧みに偽装されたフライドガーリック（言わば料理上の「ダミー」変数）である可能性がある。
 
-Refer to \autoref{tab:symbols} for the correct input codes, noting that the most common cause of compilation errors is the unescaped use of the ampersand (\&).
+
+謎は部分的に未解決のままである。\citeauthor{sato2023} の水菜と豚肉の比率に関する理論は真実であったが (\citeyear{sato2023})、パワー丼の感情的インパクトは学術的な引用を超越している。
+
+\section{記号}
+
+正しい入力コードについては \autoref{tab:symbols} を参照してください。コンパイルエラーの最も一般的な原因は、アンパサンド (\&) をエスケープせずに使用することです。
 
 
 \begin{table}[ht]
 \centering
-\caption{Common LaTeX Symbols Reference}
+\caption{一般的な LaTeX 記号一覧}
 \renewcommand{\arraystretch}{1.5}
 % Modern column definition with better spacing
 \begin{tabular}{@{\extracolsep{4pt}}l c l c l c@{}}
 \toprule
 \rowcolor{headerblue}
-\color{white}\textbf{Input} & \color{white}\textbf{Output} & 
-\color{white}\textbf{Input} & \color{white}\textbf{Output} & 
-\color{white}\textbf{Input} & \color{white}\textbf{Output} \\
+\color{white}\textbf{入力} & \color{white}\textbf{出力} & 
+\color{white}\textbf{入力} & \color{white}\textbf{出力} & 
+\color{white}\textbf{入力} & \color{white}\textbf{出力} \\
 \midrule
 \rowcolor{lightgray}
 \texttt{\textbackslash\%} & \% & 
@@ -177,20 +176,20 @@ Refer to \autoref{tab:symbols} for the correct input codes, noting that the most
 \end{tabular}
 \end{table}
 
-\section{Page Break}
+\section{改ページ}
 
-Commands to perform a page break include {\textbackslash}pagebreak, {\textbackslash}newpage, and {\textbackslash}clearpage. Although the specific usage differs for each command, they are basically used to initiate a new page.
+改ページを行うコマンドには、{\textbackslash}pagebreak、{\textbackslash}newpage、{\textbackslash}clearpage があります。それぞれの具体的な使用法は異なりますが、基本的には新しいページを開始するために使用されます。
 
 \newpage
 
-\section{Figures}
-Figures should be placed in the \texttt{gfx/} folder.
+\section{図}
+図は \texttt{gfx/} フォルダに配置してください。
 
 \begin{figure}[htbp]
     \centering
     % Using a standard example image if your specific image isn't available
     \includegraphics[width=0.26\textwidth]{gfx/example_1.jpg} 
-    \caption{Example of a single figure.}
+    \caption{単一の図の例}
     \label{fig:example-single}
 \end{figure}
 
@@ -200,13 +199,13 @@ Figures should be placed in the \texttt{gfx/} folder.
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{gfx/example_1.jpg}
-        \caption*{(a) First figure}
+        \caption*{(a) 1番目の図}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{gfx/example_2.jpg}
-        \caption*{(b) Second figure}
+        \caption*{(b) 2番目の図}
     \end{minipage}
     
     \vspace{1em}
@@ -214,36 +213,36 @@ Figures should be placed in the \texttt{gfx/} folder.
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{gfx/example_3.jpg}
-        \caption*{(c) Third figure}
+        \caption*{(c) 3番目の図}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{gfx/example_4.jpg}
-        \caption*{(d) Fourth figure}
+        \caption*{(d) 4番目の図}
     \end{minipage}
     
-    \caption{Overall caption for all four figures}
+    \caption{4つの図の全体キャプション}
     \label{fig:all}
 \end{figure}
 
 
 \newpage
 
-\section{Tables}
-Use \texttt{booktabs} for professional quality tables and \texttt{tabularx} for width control.
+\section{表}
+プロ品質の表には \texttt{booktabs} を、幅の制御には \texttt{tabularx} を使用してください。
 
 \begin{table}[ht]
     \centering
     \footnotesize
-    \caption{Example table with booktabs}
+    \caption{booktabs を使用した表の例}
     \label{tab:example}
     \begin{tabularx}{\textwidth}{lX}
         \toprule
-        \textbf{Column 1} & \textbf{Column 2 (Flexible Width)} \\
+        \textbf{列 1} & \textbf{列 2 (可変幅)} \\
         \midrule
-        Item A & Description of Item A which might be long and wrap to the next line. \\
-        Item B & Description of Item B. \\
+        項目 A & 項目 A の説明。長くなる場合は次の行に折り返されます。 \\
+        項目 B & 項目 B の説明。 \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -252,12 +251,12 @@ Use \texttt{booktabs} for professional quality tables and \texttt{tabularx} for 
 \begin{table}[ht]
 \centering
 \footnotesize
-\caption{Electronics inventory with booktabs styling}
+\caption{booktabs スタイルの電子機器在庫表}
 
 \begin{tabular}{lccr}
 \toprule
 
-\textbf{Product} & \textbf{Category} & \textbf{Stock} & \textbf{Price (\$)} \\
+\textbf{製品} & \textbf{カテゴリ} & \textbf{在庫} & \textbf{価格 (\$)} \\
 \midrule
 MacBook Pro 16" & Laptop & 45 & 2,499 \\
 Dell XPS 15 & Laptop & 32 & 1,799 \\
@@ -288,7 +287,7 @@ HDMI Cable 10ft & Cable & 412 & 15 \\
   \centering
   \setlength{\tabcolsep}{1.5pt} % default is 6pt
 
-  \caption{An example of a long table}
+  \caption{長い表の例}
   \label{tab:metrics}
   \footnotesize
   \setlength{\tabcolsep}{2pt}
@@ -308,82 +307,82 @@ HDMI Cable 10ft & Cable & 412 & 15 \\
     }
       \toprule
       % History 1 and 2
-      & \multicolumn{2}{c}{\textsc{History 1}}
-      & \multicolumn{2}{c}{\textsc{History 2}} \\
+      & \multicolumn{2}{c}{\textsc{歴史 1}}
+      & \multicolumn{2}{c}{\textsc{歴史 2}} \\
       \cmidrule(lr){2-3}\cmidrule(lr){4-5}
       % These are already \multicolumn, so they override 'S' and center
-      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}}
-      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}} \\
+      & \multicolumn{1}{c}{\textsc{単純}} & \multicolumn{1}{c}{\textsc{複雑}}
+      & \multicolumn{1}{c}{\textsc{単純}} & \multicolumn{1}{c}{\textsc{複雑}} \\
     \midrule
     %------ Syntactic block ------%
     \addlinespace
-    \multicolumn{5}{@{}l}{\textit{Syntactic Complexity}} \\
-    Sentences (\emph{N})                  & 27   & 28   & 30   & 29   \\
-    Sentence length (tokens)              & 24.44 (12.52) & 46.07 (22.36) & 24.77 (9.06) & 47.83 (23.11) \\
-    Max sentence length                   & 54   & 100  & 43   & 95   \\
-    Parse-tree height                     & 4.15 (2.03) & 7.04 (3.01) & 4.43 (1.57) & 7.34 (3.14) \\
-    Mean dependency distance              & 2.62 (0.59) & 3.27 (0.88) & 2.82 (0.40) & 3.19 (0.50) \\
+    \multicolumn{5}{@{}l}{\textit{構文的複雑さ}} \\
+    文の数 (\emph{N})                  & 27   & 28   & 30   & 29   \\
+    文の長さ (トークン)              & 24.44 (12.52) & 46.07 (22.36) & 24.77 (9.06) & 47.83 (23.11) \\
+    最大文長                   & 54   & 100  & 43   & 95   \\
+    解析木の高さ                     & 4.15 (2.03) & 7.04 (3.01) & 4.43 (1.57) & 7.34 (3.14) \\
+    平均依存距離              & 2.62 (0.59) & 3.27 (0.88) & 2.82 (0.40) & 3.19 (0.50) \\
 
     %------ Lexical block ------%
     \addlinespace
-    \multicolumn{5}{@{}l}{\textit{Lexical Complexity}} \\
-    High-frequency tokens (\%) & 17.74 & 14.45 & 17.01 & 13.90 \\
-    Mid-frequency tokens (\%)  & 22.91 & 26.38 & 19.50 & 21.07 \\
-    Low-frequency tokens (\%)  &  3.92 &  5.77 &  5.94 &  7.75 \\
+    \multicolumn{5}{@{}l}{\textit{語彙的複雑さ}} \\
+    高頻度トークン (\%) & 17.74 & 14.45 & 17.01 & 13.90 \\
+    中頻度トークン (\%)  & 22.91 & 26.38 & 19.50 & 21.07 \\
+    低頻度トークン (\%)  &  3.92 &  5.77 &  5.94 &  7.75 \\
     \midrule
     %------ Science 1 and 2 ------%
-    & \multicolumn{2}{c}{\textsc{Science 1}}
-      & \multicolumn{2}{c}{\textsc{Science 2}} \\
+    & \multicolumn{2}{c}{\textsc{科学 1}}
+      & \multicolumn{2}{c}{\textsc{科学 2}} \\
       \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}}
-      & \multicolumn{1}{c}{\textsc{Simple}} & \multicolumn{1}{c}{\textsc{Complex}} \\
+      & \multicolumn{1}{c}{\textsc{単純}} & \multicolumn{1}{c}{\textsc{複雑}}
+      & \multicolumn{1}{c}{\textsc{単純}} & \multicolumn{1}{c}{\textsc{複雑}} \\
     \midrule
     %------ Syntactic block ------%
     \addlinespace
-    \multicolumn{5}{@{}l}{\textit{Syntactic Complexity}} \\
-    Sentences (\emph{N})                  & 26   & 22   & 23   & 25   \\
-    Sentence length (tokens)              & 26.31 (7.91) & 57.23 (16.63) & 32.35 (15.81) & 50.32 (19.15) \\
-    Max sentence length                   & 45   & 94   & 87   & 99   \\
-    Parse-tree height                     & 5.23 (1.34) & 8.82 (2.30) & 5.61 (1.83) & 8.76 (2.85) \\
-    Mean dependency distance              & 2.90 (0.62) & 2.99 (0.76) & 2.91 (0.51) & 3.12 (0.66) \\
+    \multicolumn{5}{@{}l}{\textit{構文的複雑さ}} \\
+    文の数 (\emph{N})                  & 26   & 22   & 23   & 25   \\
+    文の長さ (トークン)              & 26.31 (7.91) & 57.23 (16.63) & 32.35 (15.81) & 50.32 (19.15) \\
+    最大文長                   & 45   & 94   & 87   & 99   \\
+    解析木の高さ                     & 5.23 (1.34) & 8.82 (2.30) & 5.61 (1.83) & 8.76 (2.85) \\
+    平均依存距離              & 2.90 (0.62) & 2.99 (0.76) & 2.91 (0.51) & 3.12 (0.66) \\
 
     %------ Lexical block ------%
     \addlinespace
-    \multicolumn{5}{@{}l}{\textit{Lexical Complexity}} \\
-    High-frequency tokens (\%) & 14.24 & 13.40 & 14.37 & 16.80 \\
-    Mid-frequency tokens (\%)  & 26.36 & 27.05 & 27.75 & 29.30 \\
-    Low-frequency tokens (\%)  &  8.94 &  8.77 &  4.46 &  4.46 \\
+    \multicolumn{5}{@{}l}{\textit{語彙的複雑さ}} \\
+    高頻度トークン (\%) & 14.24 & 13.40 & 14.37 & 16.80 \\
+    中頻度トークン (\%)  & 26.36 & 27.05 & 27.75 & 29.30 \\
+    低頻度トークン (\%)  &  8.94 &  8.77 &  4.46 &  4.46 \\
     \bottomrule
     \end{tabular*}
     \begin{tablenotes}[flushleft]
       \footnotesize
-      \item \emph{Note.} Values in parentheses represent standard deviations. Most metrics show means across sentences, except counts and maximum values.
+      \item \emph{注.} 括弧内の値は標準偏差を表します。ほとんどの指標は、カウントと最大値を除き、文全体の平均を示しています。
     \end{tablenotes}
   \end{threeparttable}
 \end{table*}
 
 \clearpage
 
-\section{Mathematics}
-Equations can be inline $E=mc^2$ or displayed:
+\section{数式}
+数式はインライン $E=mc^2$ または別行立てで記述できます：
 
 \begin{equation}
     \label{eq:example}
     f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2\pi i \xi x} \,d\xi
 \end{equation}
 
-For multi-line equations, use \texttt{align}:
+複数行の数式には \texttt{align} を使用します：
 \begin{align}
     a &= b + c \\
     &= d + e
 \end{align}
 
-\section{Cross-Referencing}
-You can reference chapters (\autoref{ch:examples}), figures (\autoref{fig:example-single}), tables (\autoref{tab:example}), and equations (\autoref{eq:example}) automatically.
+\section{相互参照}
+章 (\autoref{ch:examples})、図 (\autoref{fig:example-single})、表 (\autoref{tab:example})、数式 (\autoref{eq:example}) を自動的に参照できます。
 
-For Japanese articles, you can use \texttt{autorefja} to reference  figures (\autorefja{fig:example-single}), tables (\autorefja{tab:example}), and equations (\autorefja{eq:example}) automatically.
+日本語の場合では、\texttt{autorefja} を使用して、図 (\autorefja{fig:example-single})、表 (\autorefja{tab:example})、数式 (\autorefja{eq:example}) を自動的に参照できます。
 
-Alternatively, you can reference items manually: chapters (第\ref{ch:examples}章) or sections (\S\ref{sec:otherlanguages}).
+あるいは、手動で参照することも可能です：章 (第\ref{ch:examples}章) や節 (\S\ref{sec:otherlanguages})。
 
 
 \section{日本語の場合}
@@ -395,10 +394,12 @@ Alternatively, you can reference items manually: chapters (第\ref{ch:examples}�
 
 ①⑵Ⅲ㍾㍽㍼㍻㋿です。
 
-1.1.1.1 テストテストenglish
+1.1.1.1 テストテストenglish   
 
+56.47
 
-1.1
+\textcite{tanaka2025}田中(2025)---田中【2025】
+
 
 
 
@@ -461,5 +462,3 @@ Overleaf で使用できる和文フォントの一覧は次の記事にあり�
 \paragraph{Korean}
 \textko{
 해객담영주 연도미망신난구 월인어천모 운예명멸혹가도 천모연천향천횡 세발오악엄적성}
-
-
