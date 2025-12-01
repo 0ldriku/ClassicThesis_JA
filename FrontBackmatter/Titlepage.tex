@@ -4,23 +4,30 @@
 \begin{titlepage}
     %\pdfbookmark[1]{\myTitle}{titlepage}
     % if you want the titlepage to be centered, uncomment and fine-tune the line below (KOMA classes environment)
-    \begin{addmargin}[-1cm]{-3cm}
+    % Use newgeometry to center content (ignore binding offset)
+    \newgeometry{margin=3cm}
     \begin{center}
         \large
 
 
         \vfill
         \includegraphics[width=8.6 cm]{gfx/ScienceTokyo_Primary logo_RGB_L.png} \\ 
-        \vspace{6cm}
+        \vspace{1cm}
 
+        \textsf{20XX年度}
+
+        \textsf{修士/博士論文}
+        
+        
+        \vspace{6cm}
         
         \begingroup
-            \color{CTtitle}{\myTitle} \\ \bigskip
+            \color{CTtitle}{\Large\textbf\myTitle} \\ \bigskip
         \endgroup
 
         {\myName}
 
-        \vspace{2cm}
+        \vspace{8cm}
 
 
         %\mySubtitle \\ \medskip
@@ -29,19 +36,13 @@
         %\myFaculty \\
         %\myUni \\ \bigskip
 
-        A dissertation submitted to the faculty of \\
-        \myUni\\
-        in partial fulfillment of the requirements for the degree of \\
-        \bigskip
-        \myDegree\\
-        \bigskip
-        \myDepartment \\
-        \myFaculty \\
-        \myUni \\ \bigskip
+
+        東京科学大学犬学院猫コース\\
+        %\myUni\myFaculty\myDepartment \\
         \myTime\ %-- \myVersion
 
         \vfill
 
     \end{center}
-  \end{addmargin}
+    \restoregeometry
 \end{titlepage}
