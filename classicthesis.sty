@@ -251,7 +251,7 @@
 \ifthenelse{\equal{\ct@paper}{letter}}%
     {% Letter 216mm x 279mm
             \PackageInfo{classicthesis}{letter paper, Palatino or other}
-            \areaset[current]{356pt}{700pt}%  guessing from A4 values
+            %\areaset[current]{356pt}{700pt}%  guessing from A4 values
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
     }{\relax}
@@ -259,21 +259,21 @@
     {% B5 176mm x 250mm
             % Thanks to Jos\'e M. Alcaide
             \PackageInfo{classicthesis}{B5 paper, Palatino or other}%
-            \areaset[current]{311pt}{645pt}%
+            %\areaset[current]{311pt}{645pt}%
             \setlength{\marginparwidth}{6em}%
             \setlength{\marginparsep}{1.5em}%
     }{\relax}
 \ifthenelse{\equal{\ct@paper}{a5}}%
     {% A5 148mm x 210mm
             \PackageInfo{classicthesis}{A5 paper, Palatino or other}%
-            \areaset[current]{288pt}{555pt}%
+            %\areaset[current]{288pt}{555pt}%
             \setlength{\marginparwidth}{4em}%
             \setlength{\marginparsep}{1.25em}%
     }{\relax}
 \ifthenelse{\equal{\ct@paper}{a4}}%
     {% A4 210mm x 297mm
             \PackageInfo{classicthesis}{A4 paper, Palatino or other}
-            \areaset[current]{336pt}{750pt} % ~ 336 * factor 2 + 33 head + 42 \the\footskip
+            %\areaset[current]{336pt}{750pt} % ~ 336 * factor 2 + 33 head + 42 \the\footskip
             % \areaset{336pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip 10pt
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
