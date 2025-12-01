@@ -1,4 +1,4 @@
-# ClassicThesis Template (Enhanced for Japanese/CJK Support)
+# ClassicThesis Template (日本語版)
 
 A modified version of the Classic Thesis Style template with enhanced support for Japanese and multilingual academic writing.
 
