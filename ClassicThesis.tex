@@ -41,7 +41,8 @@
     \WarningFilter{titlesec}{Non standard sectioning command detected}
 \documentclass[ twoside,openright,titlepage,numbers=noenddot,%1headlines,
                 headinclude,footinclude,cleardoublepage=empty,abstract=on,
-                BCOR=5mm,paper=a4,fontsize=11pt
+                BCOR=5mm,paper=a4,fontsize=11pt,
+                headheight=16.42496pt,footheight=18.0pt
                 ]{scrbook}
 
 %********************************************************************
@@ -61,6 +62,8 @@
 \usepackage{colortbl}       
 \usepackage{array}         
 \usepackage{amsthm}
+\usepackage{setspace}
+\onehalfspacing  % 1.5 line spacing (Japanese standard)
 
 \definecolor{headerblue}{RGB}{52, 73, 94}
 \definecolor{lightgray}{RGB}{245, 245, 245}
