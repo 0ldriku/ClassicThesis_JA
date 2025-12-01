@@ -1,23 +1,23 @@
-\chapter{はじめに　序論}
+\chapter{はじめに}
 
 
 
 論文の組版において \LaTeX やWordと格闘しておられる方も多いのではないでしょうか。
-本テンプレートは、効率的に論文を執筆できるように設計されたものです。\texttt{classicthesis} パッケージ バージョン 4.8 (\url{https://ctan.org/pkg/classicthesis?lang=en}) をベースに、我々の執筆ニーズに合わせてカスタマイズしたものです。
+\texttt{classicthesis} パッケージ バージョン 4.8 (\url{https://ctan.org/pkg/classicthesis?lang=en}) をベースに、我々の執筆ニーズに合わせてカスタマイズしたものです。
 
 主な変更点は以下の通りです：
 \begin{itemize}
     \item APA 第7版の引用スタイル
-    \item 日本語著者名のカスタムフォーマット（複数の著者の間に「・」を使用）
-    \item 日本語文献のソート機能の強化
-    \item 多言語サポートの向上
+    \item 日本語著者名のカスタムフォーマット
+    \item 日本語文献のソート機能
+    \item 多言語サポート
 \end{itemize}
 
-本章では、テンプレートの機能と基本的な使用方法の概要を説明します。\autoref{ch:examples} では、実用的な例を用いて様々な \LaTeX の機能を紹介し、\autoref{ch:settings} では、テンプレートの設定オプションについて詳しく説明します。
+本章では、テンプレートの機能と基本的な使用方法の概要を説明します。\autorefja{ch:examples} では、実用的な例を用いて様々な \LaTeX の機能を紹介し、\autorefja{ch:cat}では??、\autorefja{ch:settings} では、テンプレートの設定オプションについて詳しく説明します。
 
-\section{クイックスタート (要約)}
+\section{クイックスタート}
 
-\textit{すぐに執筆を始めたいですか？} 基本的な手順は以下の通りです：
+\textbf{すぐに執筆を始めたいですか？} 基本的な手順は以下の通りです：
 
 \begin{enumerate}
     \item \textit{情報の入力}: \texttt{classicthesis-config.tex} (54行目以降) を編集し、名前、タイトル、所属などを入力します。
@@ -30,137 +30,18 @@
 
     \item \textit{コンパイル}: メニュー (左上) を開き、コンパイラを XeLaTeX に設定します。
 
+    \item \textit{Configuration Options}: In line 35 of \texttt{classicthesis-config.tex}, you can enable specific settings. Use \texttt{dottedtoc} to set page numbers flushed right in the Table of Contents, or enable \texttt{drafting} to print the version information on the first page of the thesis.
+    
+    \item \textit{Version History}: Change the version history details in \texttt{VersionHistory.tex}.
 \end{enumerate}
 
-以上です！詳細な説明については、以下を読み進めてください。
 
 
-\section{日本語対応}
+\section{英文だけの場合}
 
-本テンプレートでは、日本語入力をより良くサポートするために XeLaTeX エンジンを使用しています。オリジナルの ClassicThesis テンプレートは pdfLaTeX で最適に動作しますが、XeLaTeX は特に CJK (中国語、日本語、韓国語) 言語において優れた多言語機能を提供します。
+英文がメイン場合は下記のテンプレートを使用してください。
 
-論文が主に英語で、日本語のコンテンツが最小限の場合は、プリアンブルに以下を追加することで pdfLaTeX を使用することも可能です：
-
-\begin{lstlisting}
-%*************************************
-\usepackage{CJKutf8}
-%*************************************
-\end{lstlisting}
-
-その後、本文中で日本語テキストを以下のように囲みます：
-
-\begin{lstlisting}
-%*************************************
-\begin{CJK}{UTF8}{ipxm}
-    Put your Japanese text here.
-\end{CJK}
-%*************************************
-\end{lstlisting}
-
-\LaTeX における日本語サポートの詳細については、\url{https://www.overleaf.com/learn/latex/Japanese} を参照してください。
-
-\section{引用スタイル}
-
-\subsection{英語文献}
-
-標準的な BibTeX フォーマットに従って参考文献エントリを作成してください。以下は一般的なエントリタイプの例です：
-
-\begin{lstlisting}
-
-@incollection{fiorella2022,
-  author    = {Fiorella, Logan and Mayer, Richard E.},
-  title     = {The Generative Activity Principle in Multimedia Learning},
-  booktitle = {The Cambridge Handbook of Multimedia Learning},
-  editor    = {Mayer, Richard E. and Fiorella, Logan},
-  edition   = {3},
-  publisher = {Cambridge University Press},
-  address   = {Cambridge},
-  year      = {2022},
-  pages     = {339--350},
-  doi       = {10.1017/9781108894333.036}
-}
-
-@article{lusato2025,
-  author    = {Lu, Jialiang and Sato, Reiko},
-  title     = {Linguistic dimensions of comprehensibility and perceived fluency in {L2} speech across tasks of varying complexity},
-  journal   = {Journal of Second Language Pronunciation},
-  volume    = {11},
-  number    = {2},
-  year      = {2025},
-  pages     = {240--266},
-  doi       = {10.1075/jslp.24057.lu}
-}
-
-@book{mayer2021,
-  author    = {Mayer, Richard E.},
-  title     = {Multimedia Learning},
-  edition   = {3},
-  publisher = {Cambridge University Press},
-  address   = {Cambridge},
-  year      = {2020},
-  doi       = {10.1017/9781316941355}
-}
-
-@INPROCEEDINGS{Miede2011,
-    author = {Andr{\'e} Miede and G\"{o}khan \c{S}im\c{s}ek and Stefan Schulte
-    and Abawi, Daniel F. and Julian Eckert and Ralf Steinmetz},
-    title = {{R}evealing {B}usiness {R}elationships -- {E}avesdropping {C}ross-organizational
-    {C}ollaboration in the {I}nternet of {S}ervices},
-    booktitle = {Proceedings of the Tenth International Conference Wirtschaftsinformatik
-    (WI 2011)},
-    year = {2011},
-    volume = {2},
-    pages = {1083--1092},
-    isbn = {978-1-4467-9236-0}
-}
-\end{lstlisting}
-
-
-\subsection{日本語の文献}
-
-
-\begin{lstlisting}
-@article{tanaka2025,
-  title        = {ダミーとミダーの関連性についての検討},
-  author       = {田中, 太郎 and 山田, 花子},
-  journal      = {日本科学会誌},
-  volume       = {10},
-  number       = {1},
-  pages        = {10-25},
-  year         = {2025},
-  doi          = {10.1000/dummy.doi.123},
-  langid       = {japanese},
-  yomi         = {tanaka, taro and yamada, hanako}
-}
-
-@book{suzuki2024,
-  title        = {バナナの基礎と応用},
-  author       = {鈴木, 一郎},
-  publisher    = {東工大出版会},
-  address      = {東京},
-  year         = {2024},
-  langid       = {japanese},
-  yomi         = {suzuki, ichiro}
-}
-
-@inproceedings{sato2023,
-  title        = {東工大パワー丼における水菜と豚肉の配分},
-  author       = {加藤, 次郎},
-  booktitle    = {東工大学食学会第50回全国大会講演論文集},
-  pages        = {100-102},
-  year         = {2023},
-  month        = aug,
-  langid       = {japanese},
-  yomi         = {kato, jiro}
-}
-\end{lstlisting}
-
-\texttt{yomi} フィールドの形式によって、参考文献のソート順が決まります：
-
-\begin{description}
-    \item[ひらがな:] 日本語文献は英語文献の後に分けてリストされ、五十音順にソートされます。
-    \item[ローマ字:] 日本語文献は英語文献と混在し、アルファベット順にソートされます。
-\end{description}
-
-
-\textit{注:} 中国語の文献でも \texttt{langid=japanese} を使用できますが、参考文献リストでは日本語フォントで表示されます。個人的にはこれで問題ないと考えています。
+\begin{center}
+\url{https://github.com/0ldriku/ClassicThesis_JA}
+    
+\end{center}

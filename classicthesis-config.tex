@@ -75,14 +75,21 @@
 \newcommand{\Eg}{E.\,g.}
 \newcommand{\autorefja}[1]{%
   \begingroup
-  \def\chapterautorefname{章}%
-  \def\sectionautorefname{節}%
-  \def\subsectionautorefname{項}%
-  \def\figureautorefname{図}%
-  \def\tableautorefname{表}%
-  \def\equationautorefname{式}%
-  \def\appendixautorefname{付録}%
-  \autoref{#1}%
+  \crefname{chapter}{第}{第}%
+  \crefformat{chapter}{##2第##1章##3}%
+  \crefname{section}{第}{第}%
+  \crefformat{section}{##2第##1節##3}%
+  \crefname{subsection}{第}{第}%
+  \crefformat{subsection}{##2第##1項##3}%
+  \crefname{figure}{図}{図}%
+  \crefformat{figure}{##2図##1##3}%
+  \crefname{table}{表}{表}%
+  \crefformat{table}{##2表##1##3}%
+  \crefname{appendix}{付録}{付録}%
+  \crefformat{appendix}{##2付録##1##3}%
+  \crefname{equation}{式}{式}%
+  \crefformat{equation}{##2式##1##3}%
+  \cref{#1}%
   \endgroup
 }
 % ****************************************************************************************************
@@ -110,13 +117,19 @@
   giveninits=false%
 }{biblatex}
     \usepackage{biblatex}
-    \setlength{\bibhang}{3.3em} % Hanging indentation of 3 characters
+    \setlength{\bibhang}{2em} % Hanging indentation of 2 Japanese characters
+    
+    % Japanese Paragraph Indentation
+    \usepackage{indentfirst} % Indent first paragraph after section header
+    \AtBeginDocument{\setlength{\parindent}{1em}} % Indent width: 1 full-width character
     
     % Fix for bibliography wrapping issues with justification
     \appto{\bibsetup}{\setlength{\emergencystretch}{3em}}
 
 \DeclareLanguageMapping{american}{american-apa}
 \DeclareLanguageMapping{english}{english-apa}
+\DeclareLanguageMapping{japanese}{english-apa} % Use English APA as base for Japanese
+
 
 % ********************************************************************
 % Custom sorting: use yomi field for Japanese entries
@@ -273,6 +286,7 @@
     {\mkbibemph{#1}}% Non-Japanese: use italics
 }
 
+
 \PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
   \usepackage{amsmath}
 
@@ -405,7 +419,7 @@
  \makeatother
 
 % (Better) alternative to \autoref is \cref via the cleveref package
-%\usepackage{cleveref}
+\usepackage{cleveref}
 %\crefformat{part}{Part #2\MakeUppercase{#1}#3}
 
 
@@ -425,7 +439,7 @@
 % ********************************************************************
 % Changing the text area
 % ********************************************************************
-%\areaset[current]{312pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip
+\areaset[current]{370pt}{761pt} % Increased width from default 336pt
 %\setlength{\marginparwidth}{7em}%
 %\setlength{\marginparsep}{2em}%
 

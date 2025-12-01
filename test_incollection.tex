@@ -1,0 +1,83 @@
+% Test file for Japanese incollection bibliography
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK JP}
+
+\usepackage[style=apa,backend=biber]{biblatex}
+
+% Japanese bibliography formatting
+\DeclareNameFormat{apaauthor}{%
+  \iffieldequalstr{langid}{japanese}
+    {% Japanese: Family + Given, no comma
+      \namepartfamily
+      \namepartgiven
+      \ifnumequal{\value{listcount}}{\value{liststop}}
+        {}
+        {・}%
+    }
+    {% Non-Japanese: standard APA
+      \ifcase\value{uniquename}%
+        \usebibmacro{name:apa:family-given}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \or
+        \usebibmacro{name:apa:family-given}
+          {\namepartfamily}
+          {\namepartgiven}
+          {\namepartprefix}
+          {\namepartsuffix}%
+      \fi
+    }%
+  \usebibmacro{name:andothers}%
+}
+
+\DeclareNameAlias{apaeditor}{apaauthor}
+
+% Remove "In" for Japanese entries
+\renewbibmacro*{in:}{%
+  \iffieldequalstr{langid}{japanese}
+    {}% Japanese: no "In"
+    {\printtext{\bibstring{in}\intitlepunct}}% Non-Japanese: standard "In"
+}
+
+% Replace "Eds." with "(編)" for Japanese entries
+\DefineBibliographyStrings{japanese}{%
+  editor = {編},
+  editors = {編},
+}
+
+% Override the byeditor macro to format Japanese editors correctly
+\renewbibmacro*{byeditor+others}{%
+  \ifnameundef{editor}
+    {}
+    {\iffieldequalstr{langid}{japanese}
+      {% Japanese: Format as "名前1・名前2・名前3 (編)"
+        \printnames{editor}%
+        \addspace%
+        \mkbibparens{\bibstring{editor}}%
+        \clearname{editor}%
+      }
+      {% Non-Japanese: standard APA format
+        \usebibmacro{byeditor+othersstrg}%
+        \setunit{\addspace}%
+        \printnames[byeditor]{editor}%
+        \clearname{editor}%
+        \newunit%
+      }%
+    \usebibmacro{bytranslator+others}}%
+}
+
+\addbibresource{Bibliography.bib}
+
+\begin{document}
+
+\section{Test Japanese Incollection Entry}
+
+This is a test citation: \cite{takeda2012_cge}
+
+\printbibliography
+
+\end{document}

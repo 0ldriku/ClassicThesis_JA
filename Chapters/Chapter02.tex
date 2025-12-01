@@ -23,7 +23,7 @@
 \end{lstlisting}
 
 \subsection{フォントサイズ}
-LaTeX は、文書内の様々な組版上のニーズに対応するために、フォントサイズコマンドの階層を提供しています。\autoref{tab:fontsizes} に詳述されている10個の標準フォントサイズコマンドは、脚注や添え字用の \texttt{\textbackslash tiny} から、主要な見出しやタイトル用の \texttt{\textbackslash Huge} まで多岐にわたります。これらのコマンドは、文書の基本フォントサイズ（ドキュメントクラスのオプションで指定）に対する相対的なサイズであり、文書全体を通して一貫したスケーリングを保証します。
+LaTeX は、文書内の様々な組版上のニーズに対応するために、フォントサイズコマンドの階層を提供しています。\autorefja{tab:fontsizes} に詳述されている10個の標準フォントサイズコマンドは、脚注や添え字用の \texttt{\textbackslash tiny} から、主要な見出しやタイトル用の \texttt{\textbackslash Huge} まで多岐にわたります。これらのコマンドは、文書の基本フォントサイズ（ドキュメントクラスのオプションで指定）に対する相対的なサイズであり、文書全体を通して一貫したスケーリングを保証します。
 
 
 
@@ -188,11 +188,31 @@ Acronym testing: \ac{UML} -- \acs{UML} -- \acf{UML} -- \acp{UML}
 \begin{figure}[htbp]
     \centering
     % Using a standard example image if your specific image isn't available
-    \includegraphics[width=0.26\textwidth]{gfx/example_1.jpg} 
-    \caption{単一の図の例}
+    \includegraphics[width=0.7\textwidth]{gfx/example_1.jpg} 
+    \caption{本館前のイチョウ}
     \label{fig:example-single}
 \end{figure}
 
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_1.jpg}
+        \caption*{(a) 左の図}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{gfx/example_2.jpg}
+        \caption*{(b) 右の図}
+    \end{minipage}
+    
+
+    
+    \caption{2つの図の全体キャプション}
+    \label{fig:two}
+\end{figure}
 
 \begin{figure}[htbp]
     \centering
@@ -230,7 +250,7 @@ Acronym testing: \ac{UML} -- \acs{UML} -- \acf{UML} -- \acp{UML}
 \newpage
 
 \section{表}
-プロ品質の表には \texttt{booktabs} を、幅の制御には \texttt{tabularx} を使用してください。
+表には \texttt{booktabs} を、幅の制御には \texttt{tabularx} を使用してください。
 
 \begin{table}[ht]
     \centering
@@ -356,7 +376,7 @@ HDMI Cable 10ft & Cable & 412 & 15 \\
     \end{tabular*}
     \begin{tablenotes}[flushleft]
       \footnotesize
-      \item \emph{注.} 括弧内の値は標準偏差を表します。ほとんどの指標は、カウントと最大値を除き、文全体の平均を示しています。
+      \item \textsf{注.} 括弧内の値は標準偏差を表します。ほとんどの指標は、カウントと最大値を除き、文全体の平均を示しています。
     \end{tablenotes}
   \end{threeparttable}
 \end{table*}
@@ -385,48 +405,150 @@ HDMI Cable 10ft & Cable & 412 & 15 \\
 あるいは、手動で参照することも可能です：章 (第\ref{ch:examples}章) や節 (\S\ref{sec:otherlanguages})。
 
 
-\section{日本語の場合}
+\section{bibファイルの書き方}
 
-\subsection{普通の日本語}
-吾輩は\textbf{猫}である。名前はまだ無い。
+\subsection{英語文献}
 
-どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕まえて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始であろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶だ。その後猫にもだいぶ逢ったがこんな片輪には一度も出会した事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙を吹く。どうも咽ぽくて実に弱った。これが人間の飲む煙草というものである事はようやくこの頃知った。
+標準的な BibTeX フォーマットに従って参考文献エントリを作成してください。以下は一般的なエントリタイプの例です：
 
-①⑵Ⅲ㍾㍽㍼㍻㋿です。
+\begin{lstlisting}
 
-1.1.1.1 テストテストenglish   
+@incollection{fiorella2022,
+  author    = {Fiorella, Logan and Mayer, Richard E.},
+  title     = {The Generative Activity Principle in Multimedia Learning},
+  booktitle = {The Cambridge Handbook of Multimedia Learning},
+  editor    = {Mayer, Richard E. and Fiorella, Logan},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2022},
+  pages     = {339--350},
+  doi       = {10.1017/9781108894333.036}
+}
 
-56.47
+@article{lusato2025,
+  author    = {Lu, Jialiang and Sato, Reiko},
+  title     = {Linguistic dimensions of comprehensibility and perceived fluency in {L2} speech across tasks of varying complexity},
+  journal   = {Journal of Second Language Pronunciation},
+  volume    = {11},
+  number    = {2},
+  year      = {2025},
+  pages     = {240--266},
+  doi       = {10.1075/jslp.24057.lu}
+}
 
-\textcite{tanaka2025}田中(2025)---田中【2025】
+@book{mayer2021,
+  author    = {Mayer, Richard E.},
+  title     = {Multimedia Learning},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2020},
+  doi       = {10.1017/9781316941355}
+}
+
+@INPROCEEDINGS{Miede2011,
+    author = {Andr{\'e} Miede and G\"{o}khan \c{S}im\c{s}ek and Stefan Schulte
+    and Abawi, Daniel F. and Julian Eckert and Ralf Steinmetz},
+    title = {{R}evealing {B}usiness {R}elationships -- {E}avesdropping {C}ross-organizational
+    {C}ollaboration in the {I}nternet of {S}ervices},
+    booktitle = {Proceedings of the Tenth International Conference Wirtschaftsinformatik
+    (WI 2011)},
+    year = {2011},
+    volume = {2},
+    pages = {1083--1092},
+    isbn = {978-1-4467-9236-0}
+}
+\end{lstlisting}
 
 
+\subsection{日本語の文献}
 
 
-\subsection{日本語のフォント}
+\begin{lstlisting}
+@article{tanaka2025,
+  title        = {ダミーとミダーの関連性についての検討},
+  author       = {田中, 太郎 and 山田, 花子},
+  journal      = {日本科学会誌},
+  volume       = {10},
+  number       = {1},
+  pages        = {10-25},
+  year         = {2025},
+  doi          = {10.1000/dummy.doi.123},
+  langid       = {japanese},
+  yomi         = {tanaka, taro and yamada, hanako}
+}
 
-\subsubsection{Mainfont}
+@book{suzuki2024,
+  title        = {バナナの基礎と応用},
+  author       = {鈴木, 一郎},
+  publisher    = {東工大出版会},
+  address      = {東京},
+  year         = {2024},
+  langid       = {japanese},
+  yomi         = {suzuki, ichiro}
+}
+
+@inproceedings{sato2023,
+  title        = {東工大パワー丼における水菜と豚肉の配分},
+  author       = {加藤, 次郎},
+  booktitle    = {東工大学食学会第50回全国大会講演論文集},
+  pages        = {100-102},
+  year         = {2023},
+  month        = aug,
+  langid       = {japanese},
+  yomi         = {kato, jiro}
+}
+\end{lstlisting}
+
+\texttt{yomi} フィールドの形式によって、参考文献のソート順が決まります：
+
+\begin{description}
+    \item[ひらがな:] 日本語文献は英語文献の後に分けてリストされ、五十音順にソートされます。
+    \item[ローマ字:] 日本語文献は英語文献と混在し、アルファベット順にソートされます。
+\end{description}
+
+
+中国語の文献でも \texttt{langid=japanese} を使用できますが、参考文献リストでは日本語フォントで表示されます。個人的にはこれで問題ないと考えています。
+
+
+\section{日本語のフォント}
+
+\subsection{Mainfont}
 
 吾輩は猫である。名前はまだ無い。
 
-\noindent
+
 \textbf{吾輩は猫である。名前はまだ無い。}
 
-\subsubsection{Sansfont}
+\subsection{Sansfont}
 
 
-\textsf{吾輩は猫である。名前はまだ無い。 test english 1.1.1.1   35.5}
-
-\noindent
-\textsf{\textbf{吾輩は猫である。名前はまだ無い。 this is a test fot the font Sansfont}}
+\textsf{吾輩は猫である。名前はまだ無い。}
 
 
-\subsubsection{Monofont}
+\textsf{\textbf{吾輩は猫である。名前はまだ無い。}}
+
+
+\subsection{Monofont}
 
 \texttt{吾輩は猫である。名前はまだ無い。}
 
-\noindent
+
 \texttt{\textbf{吾輩は猫である。名前はまだ無い。}}
+
+
+\subsection{特殊記号}
+
+
+ ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳ ⑴ ⑵ ⑶ ⑷ ⑸ ⑹ ⑺ ⑻ ⑼ ⑽ ⑾ ⑿ ⒀ ⒁ ⒂ ⒃ ⒄ ⒅ ⒆ ⒇ ⒈ ⒉ ⒊ ⒋ ⒌ ⒍ ⒎ ⒏ ⒐ ⒑ ⒒ ⒓ ⒔ ⒕ ⒖ ⒗ ⒘ ⒙ ⒚ ⒛ ⒜ ⒝ ⒞ ⒟ ⒠ ⒡ ⒢ ⒣ ⒤ ⒥ ⒦ ⒧ ⒨ ⒩ ⒪ ⒫ ⒬ ⒭ ⒮ ⒯ ⒰ ⒱ ⒲ ⒳ ⒴ ⒵ Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩ ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ ⓘ ⓙ ⓚ ⓛ ⓜ ⓝ ⓞ ⓟ ⓠ ⓡ ⓢ ⓣ ⓤ ⓥ ⓦ ⓧ ⓨ ⓩ
+
+
+㍻ ㍼ ㍽ ㍾ ㍿ ㈱ ㈲ ㈳ ㈴ ㈵ ㈶ ㈷ ㈸ ㈹ ㈺ ㈻ ㈼ ㈽ ㈾ ㈿ №  ㎟ ㎠ ㎡ ㎢ ㎣ ㎤ ㎥ ㎦ ㎎ ㎏ ㎐ ㎑ ㎒ ㎓ ㎔ ㏂ ㏘
+
+☀ ☁ ☂ ☃ ★ ☆ ☎ ☏ ☜ ☝ ☞ ☟ ☯ ♀ ♁ ♂ ☉
+
+
 
 
 \vspace{1cm}

@@ -1,0 +1,74 @@
+% Minimal test for Japanese incollection
+\documentclass{article}
+\usepackage{filecontents}
+
+\begin{filecontents}{test-bib.bib}
+@InCollection{test_ja,
+  author       = {武田, 史郎},
+  title        = {テストタイトル},
+  editor       = {有村, 俊秀 and 蓬田, 守弘 and 川瀬, 剛志},
+  booktitle    = {テストブックタイトル},
+  pages        = {15-36},
+  publisher    = {東京大学出版会},
+  year         = 2012,
+  langid       = {japanese},
+}
+\end{filecontents}
+
+\usepackage[style=apa,backend=biber]{biblatex}
+
+% Map japanese to english-apa
+\DeclareLanguageMapping{japanese}{english-apa}
+
+% Japanese author/editor format
+\DeclareNameFormat{apaauthor}{%
+  \iffieldequalstr{langid}{japanese}
+    {\namepartfamily\namepartgiven
+      \ifnumequal{\value{listcount}}{\value{liststop}}{}{・}}
+    {\usebibmacro{name:apa:family-given}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}}%
+  \usebibmacro{name:andothers}%
+}
+
+\DeclareNameAlias{apaeditor}{apaauthor}
+
+% Japanese byeditor format  
+\DeclareNameFormat{apabyeditor}{%
+  \iffieldequalstr{langid}{japanese}
+    {\namepartfamily\namepartgiven
+      \ifnumequal{\value{listcount}}{\value{liststop}}{}{・}}
+    {\usebibmacro{name:apa:family-given}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}}%
+  \usebibmacro{name:andothers}%
+}
+
+\DeclareNameAlias{byeditor}{apabyeditor}
+
+% Remove "In" for Japanese
+\renewbibmacro*{in:}{%
+  \iffieldequalstr{langid}{japanese}
+    {}
+    {\printtext{\bibstring{in}\intitlepunct}}%
+}
+
+% Japanese editor string
+\DefineBibliographyStrings{japanese}{%
+  editor = {編},
+  editors = {編},
+}
+
+% Override byeditor+others
+\renewbibmacro*{byeditor+others}{%
+  \ifnameundef{editor}
+    {}
+    {\iffieldequalstr{langid}{japanese}
+      {\printnames[byeditor]{editor}\addspace\mkbibparens{\bibstring{editor}}\clearname{editor}}
+      {\usebibmacro{byeditor+othersstrg}\setunit{\addspace}\printnames[byeditor]{editor}\clearname{editor}\newunit}%
+    \usebibmacro{bytranslator+others}}%
+}
+
+\addbibresource{test-bib.bib}
+
+\begin{document}
+Test: \cite{test_ja}
+
+\printbibliography
+\end{document}

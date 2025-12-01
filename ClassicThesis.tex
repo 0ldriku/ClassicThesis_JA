@@ -60,17 +60,12 @@
 \usepackage{multicol}
 \usepackage{colortbl}       
 \usepackage{array}         
-
+\usepackage{amsthm}
 
 \definecolor{headerblue}{RGB}{52, 73, 94}
 \definecolor{lightgray}{RGB}{245, 245, 245}
 
-\ifPDFTeX
-  \usepackage{CJKutf8}
-  \usepackage{ipaex-type1}
-  \usepackage[whole]{bxcjkjatype}
-\else % Use this for XeLaTeX, especially for Japanese-heavy documents
-  \usepackage{xeCJK}
+\usepackage{xeCJK}
   \setmainfont[Ligatures=TeX,Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,ItalicFont=*-italic,BoldItalicFont=*-bolditalic]{texgyretermes}
   \setsansfont[BoldFont=Noto Sans CJK JP Bold]{Noto Sans CJK JP}
   \setCJKmainfont[
@@ -80,7 +75,7 @@
     BoldFont=Noto Serif CJK JP Bold
 ]{Noto Serif CJK JP}
   \setCJKsansfont[
-    Scale=MatchLowercase,
+    %Scale=MatchLowercase,
     BoldFont=Noto Sans CJK JP Bold
 ]{Noto Sans CJK JP}
   \setCJKmonofont[BoldFont=Noto Sans Mono CJK JP Bold]{Noto Sans Mono CJK JP}% Default fonts, can be customized
@@ -121,10 +116,14 @@
   Language=Korean
 ]
 
-\xeCJKDeclareCharClass{CJK}{`①,`⑵,`Ⅲ,`☃,}
-%`1,`2,`3,`4,`5,`6,`7,`8,`9,`0} 
+% 1. Enclosed Alphanumerics (①, ⓐ) - Noto handles these well
+\xeCJKDeclareCharClass{CJK}{"2460->"24FF}
 
-\fi
+% 2. CJK Compatibility (㍻, ㎏, ㎡) - Noto handles these well
+\xeCJKDeclareCharClass{CJK}{"3300->"33FF}
+
+\xeCJKDeclareCharClass{CJK}{`☀,`☁,`☂,`☃,`★,`☆,`☎,`☏,`☜,`☝,`☞,`☟,`☯,`♀,`♁,`♂,`☉}
+
 
 \newcommand{\textzhtc}[1]{{\tchinesefont #1}} % for Traditional Chinese
 \newcommand{\textzh}[1]{{\schinesefont #1}} % for Simplified Chinese
@@ -145,13 +144,95 @@
 %\hyphenation{put special hyphenation here}
 
 % ********************************************************************
+% ToC Customization
+% ********************************************************************
+\makeatletter
+\AtBeginDocument{%
+    % Rename ToC
+    \renewcommand{\contentsname}{目次}
+    \@ifpackageloaded{babel}{%
+        \addto\captionsamerican{\renewcommand{\contentsname}{目次}}%
+        \addto\captionsenglish{\renewcommand{\contentsname}{目次}}%
+    }{}
+    
+    % Define Regular weight font for ToC
+    \newfontfamily\headerLatinRegular{Noto Sans CJK JP}
+    \newCJKfontfamily\headerCJKRegular{Noto Sans CJK JP}
+    \newcommand{\myHeaderRegularFont}{\headerLatinRegular\headerCJKRegular}
+
+    % Part (Gothic Medium, Large, Uppercase Roman)
+    \renewcommand{\thepart}{\Roman{part}}
+    \renewcommand{\cftpartfont}{\color{CTtitle}\myHeaderFont\Large}
+    \renewcommand{\cftpartpagefont}{\myHeaderFont\Large}
+    \renewcommand{\cftpartpresnum}{\myHeaderFont\Large}
+    \renewcommand{\cftpartaftersnum}{}
+    \renewcommand{\cftpartaftersnumb}{}
+    \setlength{\cftpartnumwidth}{2em}
+
+    % Chapter (Serif, Large)
+    \renewcommand{\cftchapfont}{\rmfamily\Large}
+    \renewcommand{\cftchappagefont}{\rmfamily\Large}
+    \renewcommand{\cftchappresnum}{\rmfamily\Large}
+    \renewcommand{\cftchapaftersnumb}{}
+    \setlength{\cftbeforechapskip}{0.66\baselineskip}
+
+    % Section (Gothic Regular, Normal)
+    \renewcommand{\cftsecfont}{\myHeaderRegularFont\normalsize}
+    \renewcommand{\cftsecpagefont}{\myHeaderRegularFont\normalsize}
+    \renewcommand{\cftsecpresnum}{\myHeaderRegularFont\normalsize}
+    \setlength{\cftbeforesecskip}{0.33em}
+
+    % Subsection (Gothic Regular, Small)
+    \renewcommand{\cftsubsecfont}{\myHeaderRegularFont\small}
+    \renewcommand{\cftsubsecpagefont}{\myHeaderRegularFont\small}
+    \renewcommand{\cftsubsecpresnum}{\myHeaderRegularFont\small}
+    \setlength{\cftbeforesubsecskip}{0.33em}
+    
+    % Subsubsection (Gothic Light, Small)
+    \renewcommand{\cftsubsubsecfont}{\captionLightFont\small}
+    \renewcommand{\cftsubsubsecpagefont}{\captionLightFont\small}
+    \renewcommand{\cftsubsubsecpresnum}{\captionLightFont\small}
+
+    % List of Figures (Gothic Regular)
+    \renewcommand{\listfigurename}{図目次}
+    \@ifpackageloaded{babel}{%
+        \addto\captionsamerican{\renewcommand{\listfigurename}{図目次}}%
+        \addto\captionsenglish{\renewcommand{\listfigurename}{図目次}}%
+    }{}
+    \renewcommand{\cftfigfont}{\myHeaderRegularFont\small}
+    \renewcommand{\cftfigpagefont}{\myHeaderRegularFont\small}
+    \renewcommand{\cftfigpresnum}{図~}
+    \renewcommand{\cftfigaftersnum}{}
+    \setlength{\cftfignumwidth}{4em}
+    
+    % List of Tables (Gothic Regular)
+    \renewcommand{\listtablename}{表目次}
+    \@ifpackageloaded{babel}{%
+        \addto\captionsamerican{\renewcommand{\listtablename}{表目次}}%
+        \addto\captionsenglish{\renewcommand{\listtablename}{表目次}}%
+    }{}
+    \renewcommand{\cfttabfont}{\myHeaderRegularFont\small}
+    \renewcommand{\cfttabpagefont}{\myHeaderRegularFont\small}
+    \renewcommand{\cfttabpresnum}{表~}
+    \renewcommand{\cfttabaftersnum}{}
+    \setlength{\cfttabnumwidth}{4em}
+
+    % Part Cover Page Format (第I部)
+    \titleformat{\part}[display]
+        {\normalfont\centering\Large\rmfamily\bfseries}
+        {\thispagestyle{empty} 第\thepart 部}{1em}
+        {\color{CTtitle}}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
+}
+\makeatother
+
+% ********************************************************************
 % GO!GO!GO! MOVE IT!
 %*******************************************************
 \begin{document}
 \frenchspacing
 \raggedbottom
 \selectlanguage{american} % american ngerman
-%\renewcommand*{\bibname}{new name}
+\renewcommand*{\bibname}{引用文献}
 %\setbibpreamble{}
 \pagenumbering{roman}
 \pagestyle{plain}
@@ -180,18 +261,19 @@
 % use \cleardoublepage here to avoid problems with pdfbookmark
 \cleardoublepage
 \ctparttext{This part provides essential information for getting started with the template, including setup instructions and basic usage guidelines.}
-\part{Usage Guide}\label{pt:guide}
+\part{ガイド}\label{pt:guide}
 \include{Chapters/Chapter01}
 \cleardoublepage
 
 \ctparttext{This part demonstrates various \LaTeX{} features available in this template, including formatting, citations, figures, tables, and multilingual support.}
-\part{The Showcase}\label{pt:showcase}
+\part{使用例}\label{pt:showcase}
 \include{Chapters/Chapter02}
+\include{Chapters/Chapter03}
 \cleardoublepage
 
 \ctparttext{This part contains detailed documentation about template configuration, customization options, and technical specifications.}
-\part{Manual}\label{pt:manual}
-\include{Chapters/Chapter03}
+\part{マニュアル}\label{pt:manual}
+\include{Chapters/Chapter04}
 \cleardoublepage
 % ********************************************************************
 % Backmatter
@@ -199,8 +281,9 @@
 \appendix
 %\renewcommand{\thechapter}{\alph{chapter}}
 \cleardoublepage
-\part{Appendix}
-\include{Chapters/Chapter0A}
+\part{付録}
+\include{Chapters/AppendixA}
+\include{Chapters/AppendixB}
 %********************************************************************
 % Other Stuff in the Back
 %*******************************************************
