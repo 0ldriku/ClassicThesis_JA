@@ -1,6 +1,6 @@
 # ClassicThesis Template (日本語版)
 
-A modified version of the Classic Thesis Style template with enhanced support for Japanese and multilingual academic writing.
+A modified version of the Classic Thesis Style template with enhanced support for Japanese and multilingual academic writing. If your thesis are mainly in English, please use the [English template](https://github.com/0ldriku/ClassicThesis_EN).
 
 ## About This Template
 
