@@ -42,7 +42,7 @@
 \documentclass[ twoside,openright,titlepage,numbers=noenddot,%1headlines,
                 headinclude,footinclude,cleardoublepage=empty,abstract=on,
                 BCOR=5mm,paper=a4,fontsize=11pt,
-                headheight=16.42496pt,footheight=18.0pt
+                headheight=21pt,footheight=21pt
                 ]{scrbook}
 
 %********************************************************************
@@ -63,8 +63,8 @@
 \usepackage{array}         
 \usepackage{amsthm}
 \usepackage{setspace}
-\onehalfspacing  % 1.5 line spacing (Japanese standard)
-
+%\onehalfspacing  % 1.5 line spacing (Japanese standard)
+\setstretch{1.5} 
 \definecolor{headerblue}{RGB}{52, 73, 94}
 \definecolor{lightgray}{RGB}{245, 245, 245}
 
@@ -177,21 +177,26 @@
     \newCJKfontfamily\headerCJKRegular{Noto Sans CJK JP}
     \newcommand{\myHeaderRegularFont}{\headerLatinRegular\headerCJKRegular}
 
-    % Part (Gothic Medium, Large, Uppercase Roman)
+    % Define Serif Medium font for ToC Part and Chapter entries
+    \newfontfamily\tocSerifLatin{Noto Serif CJK JP}[UprightFont=*-Medium]
+    \newCJKfontfamily\tocSerifCJK{Noto Serif CJK JP}[UprightFont=*-Medium]
+    \newcommand{\myTocSerifFont}{\tocSerifLatin\tocSerifCJK}
+
+    % Part (Serif Medium, Normal size, Uppercase Roman)
     \renewcommand{\thepart}{\Roman{part}}
-    \renewcommand{\cftpartfont}{\color{CTtitle}\myHeaderFont\Large}
-    \renewcommand{\cftpartpagefont}{\myHeaderFont\Large}
-    \renewcommand{\cftpartpresnum}{\myHeaderFont\Large}
+    \renewcommand{\cftpartfont}{\color{CTtitle}\myTocSerifFont\normalsize}
+    \renewcommand{\cftpartpagefont}{\myTocSerifFont\normalsize}
+    \renewcommand{\cftpartpresnum}{\myTocSerifFont\normalsize}
     \renewcommand{\cftpartaftersnum}{}
     \renewcommand{\cftpartaftersnumb}{}
     \setlength{\cftpartnumwidth}{2em}
 
-    % Chapter (Serif, Large)
-    \renewcommand{\cftchapfont}{\rmfamily\normalsize}
-    \renewcommand{\cftchappagefont}{\rmfamily\normalsize}
-    \renewcommand{\cftchappresnum}{\rmfamily\normalsize}
+    % Chapter (Serif Medium, Normal size)
+    \renewcommand{\cftchapfont}{\myTocSerifFont\normalsize}
+    \renewcommand{\cftchappagefont}{\myTocSerifFont\normalsize}
+    \renewcommand{\cftchappresnum}{\myTocSerifFont\normalsize}
     \renewcommand{\cftchapaftersnumb}{}
-    \setlength{\cftbeforechapskip}{0.66\baselineskip}
+    \setlength{\cftbeforechapskip}{0.1\baselineskip}
 
     % Section (Gothic Regular, Normal)
     \renewcommand{\cftsecfont}{\myHeaderRegularFont\normalsize}
